@@ -34,16 +34,14 @@ resource:
 
 This will use your clients timezone. It does not use a Home Assistant time entity.
 
-Minimum config required: 
+#### Minimum config: 
 ```Yaml
 type: custom:better-moment-card
 moment:
   - format: HH:mm:ss
 ```
 
-All options:
-
-
+#### Available options:
 ```Yaml
 type: custom:better-moment-card
 parentStyle: background-color:blue;
@@ -54,11 +52,11 @@ moment:
       Oh hi <strong>{ { moment } }</strong> 
 ```
 
-You can customize the styling using CSS. Use the inbuilt `style:` option to apply styling to the instance.
+Customize styling using CSS: Use the inbuilt `style:` option to apply styling to the instance.
 
 Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
 
-Some ideas to get you started 
+### Some ideas to get you started 
 
 ```Yaml
 type: custom:better-moment-card
