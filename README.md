@@ -43,7 +43,6 @@ moment:
 
 All options:
 
-You can customize the styling using CSS. Use the inbuilt `style:` option to apply styling to the instance.
 
 ```Yaml
 type: custom:better-moment-card
@@ -54,6 +53,9 @@ moment:
     template: |
       Oh hi <strong>{{moment}}</strong> 
 ```
+
+You can customize the styling using CSS. Use the inbuilt `style:` option to apply styling to the instance.
+
 Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
 
 Some ideas to get you started 
@@ -67,7 +69,7 @@ moment:
     style: font-size:2em; text-align:center;
 ```
 
-#### All available date formats
+#### Available date formats
 
 These go inside `  - format: `
 
