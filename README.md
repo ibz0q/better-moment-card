@@ -4,9 +4,9 @@
 
 **Current Version:** 0.0.2
 
-A custom lovelace card that's highly customizable to show custom date and time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. 
+A lovelace card that's highly customizable to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. 
 
-Inspired by the Clockwork and Simple clock cards. Here's an example - :
+Inspired by the Clockwork and Simple clock cards. Example:
 
 ![Preview](image-2.png)
 
@@ -41,7 +41,9 @@ moment:
   - format: HH:mm:ss
 ```
 
-All options
+All options:
+
+You can customize the styling using CSS. Use the inbuilt `style:` option to apply styling to the instance.
 
 ```Yaml
 type: custom:better-moment-card
@@ -52,6 +54,7 @@ moment:
     template: |
       Oh hi <strong>{{moment}}</strong> 
 ```
+Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
 
 Some ideas to get you started 
 
