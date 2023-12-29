@@ -5,7 +5,7 @@ class BetterMomentCard extends HTMLElement {
 	}
 	createTime() {
 		if (!this.content) {
-			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '"' : ""}></div></ha-card>`;
+			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '"' : "style='padding: 2.5em 0'"}></div></ha-card>`;
 			this.content = this.querySelector("div");
 			var config = this.config, elm = [];
 			if (config.moment !== null && config.moment[0]) {
@@ -22,9 +22,9 @@ class BetterMomentCard extends HTMLElement {
 						elm[k].innerHTML = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
 					})
 				};
+				updateDom();
 				clearInterval(window.__global_minterval);
 				window.__global_minterval = setInterval(updateDom, 1000);
-				updateDom();
 			}
 		}
 	}
@@ -36,7 +36,7 @@ class BetterMomentCard extends HTMLElement {
 		}
 	}
 	getCardSize() {
-		return 1;
+		return 2;
 	}
 }
 customElements.define('better-moment-card', BetterMomentCard);
