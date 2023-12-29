@@ -51,7 +51,7 @@ moment:
   - format: YYYY
     style: font-size:2em; text-align:center; 
     template: |
-      Oh hi <strong>{{moment}}</strong> 
+      Oh hi <strong>{ { moment } }</strong> 
 ```
 
 You can customize the styling using CSS. Use the inbuilt `style:` option to apply styling to the instance.
