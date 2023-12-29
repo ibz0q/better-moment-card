@@ -20,7 +20,6 @@ class BetterMomentCard extends HTMLElement {
 						var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss"
 						var time = dayjs().format(format)
 						elm[k].innerHTML = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
-						console.log("tracked")
 					})
 				};
 				clearInterval(window.__global_minterval);
