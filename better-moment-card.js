@@ -17,8 +17,7 @@ class BetterMomentCard extends HTMLElement {
 				});
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
-						var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss"
-						var time = dayjs().format(format)
+						var time = dayjs().format(config.moment[k].format ? config.moment[k].format : "HH:mm:ss")
 						elm[k].innerHTML = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
 					})
 				};
