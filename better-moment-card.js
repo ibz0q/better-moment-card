@@ -1,6 +1,4 @@
 import dayjs from "./dayjs.min.js"; // Removed ability to use HomeAssistant's time, we use local device time only
-import utc from 'dayjs/plugin/utc'
-import timezone from 'dayjs/plugin/timezone'
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
 		if (!this.content) {
