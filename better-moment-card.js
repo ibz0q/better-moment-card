@@ -4,7 +4,7 @@ class BetterMomentCard extends HTMLElement {
         if (!this.content) {
             this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '"' : ""}></div></ha-card>`;
             this.content = this.querySelector("div");
-            var config = this.config, elm = [], dayjsObj = config.locale ? dayjs.locale(config.locale) : dayjs()
+            var config = this.config, elm = [];
             if (config.moment !== null && config.moment[0]) {
                 Object.keys(this.config.moment).forEach(k => {
                     elm[k] = document.createElement('div');
@@ -15,7 +15,7 @@ class BetterMomentCard extends HTMLElement {
                 let updateDom = () => {
                     Object.keys(config.moment).forEach(k => {
                         var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss"
-                        var time = dayjsObj.format(format)
+                        var time = dayjs().format(format)
                         elm[k].innerHTML = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
                         console.log("track")
                     })
