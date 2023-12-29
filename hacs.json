@@ -1,5 +1,5 @@
 {
     "name": "Better Moment Card",
-    "render_readme": true,
-    "filename": "better-moment-card.js"
+    "filename": "better-moment-card.js",
+    "render_readme": true
   }
