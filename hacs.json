@@ -1,6 +1,5 @@
 {
     "name": "Better Moment Card",
-    "content_in_root": true,
     "render_readme": true,
     "filename": "better-moment-card.js"
   }
