@@ -55,10 +55,10 @@ moment:
 type: custom:better-moment-card
 parentStyle: background-color:blue;
 moment:
-  - format: YYYY
+  - format: YYYY # Date format (table below)
     timezone: Europe/Brussels #Uses IANA tz db format
-    style: font-size:2em; text-align:center; 
-    template: |
+    style: font-size:2em; text-align:center; #CSS
+    template: | #HTML
       Oh hi, it's <strong>{ { moment } }</strong> 
     # Oh hi, it's *2024*
 ```
