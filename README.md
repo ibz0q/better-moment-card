@@ -155,7 +155,7 @@ Timezones need to be in the IANA format in tz database, you can find them here: 
 
 i.e. `timezone: Europe/London`
 
-### Available date formats
+### Date/Time Formats
 
 These go inside `  - format: `
 
