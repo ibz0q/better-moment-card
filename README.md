@@ -2,23 +2,25 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
-**Current Version:** 2023.12.29.3
+**Current Version: 2023.12.29.3**
+___
+ 
+A highly customizable lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. Inspired by the Clockwork and Simple clock cards. 
 
-A lovelace card that's highly customizable to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. Inspired by the Clockwork and Simple clock cards. 
 
-*Sample 3 (Clockwork style):*
+#### *Sample 3 (Clockwork style):*
 
 <img src="image-1.png" width="60%">
 
-*Sample 1*
+#### *Sample 1*
 
 <img src="image-3.png" width="50%">
 
-*Sample 2*
+#### *Sample 2*
 
 <img src="image-2.png" width="50%">
 
-More examples 
+#### More examples 
 
 <img src="image.png" width="100%">
 
@@ -43,14 +45,14 @@ resource:
 
 This will use your clients timezone. It does not use a Home Assistant time entity.
 
-#### Minimum config: 
+### Minimal config: 
 ```Yaml
 type: custom:better-moment-card
 moment:
   - format: HH:mm:ss
 ```
 
-#### Available options:
+### Available options:
 ```Yaml
 type: custom:better-moment-card
 parentStyle: background-color:blue;
@@ -58,16 +60,17 @@ moment:
   - format: YYYY
     style: font-size:2em; text-align:center; 
     template: |
-      Oh hi <strong>{ { moment } }</strong> 
+      Oh hi, it's <strong>{ { moment } }</strong> 
+    # Oh hi, it's *2024*
 ```
 
 Customize styling using CSS: Use the inbuilt `style:` option to apply styling to the instance.
 
 Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
 
-### Some ideas to get you started 
+### Some sample ideas to get you started 
 
-Sample Style 1
+#### Style 1
 ```Yaml
 type: custom:better-moment-card
 parentStyle: line-height:4em;
@@ -78,7 +81,7 @@ moment:
     style: font-size:1.6em; text-align:center;
 ```
 
-Sample Style 2
+#### Style 2
 ```Yaml
 type: custom:better-moment-card
 moment:
@@ -88,7 +91,7 @@ moment:
     style: font-size:2em; text-align:center;
 ```
 
-Sample Style 3
+#### Style 3
 ```Yaml
 type: custom:better-moment-card
 parentStyle: |
@@ -125,8 +128,11 @@ moment:
       <strong>🇩🇪 Brussels</strong>
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
+### List of Timezones
 
-#### Available date formats
+Timezones need to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
+
+### Available date formats
 
 These go inside `  - format: `
 
