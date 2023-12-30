@@ -58,6 +58,7 @@ type: custom:better-moment-card
 parentStyle: background-color:blue;
 moment:
   - format: YYYY
+    timezone: Europe/Brussels #Uses IANA tz db format
     style: font-size:2em; text-align:center; 
     template: |
       Oh hi, it's <strong>{ { moment } }</strong> 
