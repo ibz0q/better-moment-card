@@ -5,7 +5,7 @@ class BetterMomentCard extends HTMLElement {
 	}
 	createTime() {
 		if (!this.content) {
-			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '"' : "style='padding: 2.5em 0'"}></div></ha-card>`;
+			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '; line-height:normal;"' : "style='line-height:normal;'"}></div></ha-card>`;
 			this.content = this.querySelector("div");
 			var config = this.config, elm = [];
 			if (config.moment !== null && config.moment[0]) {

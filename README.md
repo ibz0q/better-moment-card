@@ -8,9 +8,13 @@ A lovelace card that's highly customizable to show custom date/time, digital clo
 
 Inspired by the Clockwork and Simple clock cards. Example:
 
-![Preview](image-2.png)
+![Alt text](image-3.png) 
+*Sample Style 1*
 
-Config example: 
+![Preview](image-2.png)
+*Sample Style 2*
+
+More examples 
 
 ![Alt text](image.png)
 
@@ -58,6 +62,18 @@ Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be 
 
 ### Some ideas to get you started 
 
+Sample Style 1
+```Yaml
+type: custom:better-moment-card
+parentStyle: line-height:4em;
+moment:
+  - format: HH:mm:ss
+    style: font-size:4em; text-align:center; font-weight:400;
+  - format: dddd, DD MMMM
+    style: font-size:1.6em; text-align:center;
+```
+
+Sample Style 2
 ```Yaml
 type: custom:better-moment-card
 moment:
