@@ -25,13 +25,13 @@ Style each time section (moment), with any style you want. You can even position
 <img src="image.png" width="100%">
 
 
-## INSTALL WITH HACS
+## Install with HACS
 
 To install via [HACS](https://hacs.xyz/) select the "Custom repositories" button add in the link in this format ***user* + *repository name***  (You can find this information at the top of the repository.  For category select  **Lovelace** then click "ADD".
 
 After this navigate to "Frontend" click the plus symbol and enter "Better Moment Card" into the search bar. Then click on the first result.  and select "Install this repository in HACS" and you are done!
 
-## MANUAL INSTALLATION
+## Manual Install
 
 To install add it to your custom lovelace folder and then reference it accordingly
 
@@ -41,9 +41,7 @@ resource:
     type: js
 ```
 
-## CONFIGURATION
-
-This will use your clients timezone. It does not use a Home Assistant time entity.
+## Configuration
 
 ### Minimal config: 
 ```Yaml
@@ -65,9 +63,29 @@ moment:
     # Oh hi, it's *2024*
 ```
 
+### Styling
+
 Customize styling using CSS: Use the inbuilt `style:` option to apply styling to the instance.
 
 Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
+
+```
++------------------+
+|    HA-card       |
+|                  |
+|  +---------------+
+|  | card-content  |
+|  | (parentStyle) |
+|  |  +------------+
+|  |  | moment-0   |
+|  |  | (style)   |
+|  |  +------------+
+|  |  | moment-1   |
+|  |  | (style)   |
+|  |  +------------+
+|  +---------------+
++------------------+
+```
 
 ### Some sample ideas to get you started 
 
@@ -129,9 +147,13 @@ moment:
       <strong>🇩🇪 Brussels</strong>
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
-### List of Timezones
+### Timezones
+
+This will use your clients timezone. It does not use a Home Assistant time entity and there will be no support in adding this.
 
 Timezones need to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
+
+i.e. `timezone: Europe/London`
 
 ### Available date formats
 
