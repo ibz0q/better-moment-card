@@ -4,19 +4,24 @@
 
 **Current Version:** 2023.12.29.3
 
-A lovelace card that's highly customizable to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. 
+A lovelace card that's highly customizable to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. Inspired by the Clockwork and Simple clock cards. 
 
-Inspired by the Clockwork and Simple clock cards. Example:
+*Sample 3 (Clockwork style):*
 
-![Alt text](image-3.png) 
-*Sample Style 1*
+<img src="image-1.png" width="80%">
 
-![Preview](image-2.png)
-*Sample Style 2*
+*Sample 1*
+
+<img src="image-3.png" width="60%">
+
+*Sample 2*
+
+<img src="image-2.png" width="60%">
 
 More examples 
 
-![Alt text](image.png)
+<img src="image.png" width="100%">
+
 
 ## INSTALL WITH HACS
 
@@ -81,6 +86,44 @@ moment:
     style: font-size:3em; text-align:center; padding:0 0 1em 0
   - format: dddd, DD MMMM YY
     style: font-size:2em; text-align:center;
+```
+
+Sample Style 3
+```Yaml
+type: custom:better-moment-card
+parentStyle: |
+  line-height:normal;
+  padding-bottom:0em;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 0px; 
+  grid-template-areas: 
+    'time time riyadh'
+    'date date brussells'; 
+moment:
+  - format: HH:mm:ss
+    style: >
+      font-size:4.4em; text-align:center; font-weight:400; grid-area: time;
+      font-weight:500
+  - format: dddd, DD MMMM
+    style: >
+      font-size:1.6em; line-height:1em; text-align:center;padding-top:0.5em;
+      grid-area: date; 
+  - format: HH:mm:ss
+    timezone: Asia/Riyadh
+    style: |
+      text-align:center; line-height:2em; padding-top:0.2em; grid-area: riyadh;
+    template: |
+      <strong>🇸🇦 Riyadh</strong>
+      <div style="font-size:1.2em;">{{moment}}</div>
+  - format: HH:mm:ss
+    timezone: Europe/Brussels
+    style: |
+      text-align:center; line-height:2em; grid-area: brussells;
+    template: |
+      <strong>🇩🇪 Brussels</strong>
+      <div style="font-size:1.2em;">{{moment}}</div>
 ```
 
 #### Available date formats

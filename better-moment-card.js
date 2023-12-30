@@ -1,4 +1,6 @@
 import dayjs from "./dayjs.min.js";
+import utc from "./timezone.js";
+import timezone from "./utc.js";
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
 		this.createTime()
@@ -7,6 +9,8 @@ class BetterMomentCard extends HTMLElement {
 		if (!this.content) {
 			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '; line-height:normal;"' : "style='line-height:normal;'"}></div></ha-card>`;
 			this.content = this.querySelector("div");
+			dayjs.extend(utc)
+			dayjs.extend(timezone)
 			var config = this.config, elm = [];
 			if (config.moment !== null && config.moment[0]) {
 				Object.keys(this.config.moment).forEach(k => {
@@ -17,7 +21,8 @@ class BetterMomentCard extends HTMLElement {
 				});
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
-						var time = dayjs().format(config.moment[k].format ? config.moment[k].format : "HH:mm:ss")
+						var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss";
+						var time = config.moment[k].timezone ? dayjs().tz(config.moment[k].timezone).format(format) : dayjs().format(format); 
 						elm[k].innerHTML = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
 					})
 				};
