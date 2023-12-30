@@ -4,20 +4,35 @@
 
 **Current Version: 2023.12.29.3**
  
-A customizable lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses the day.js library. Inspired by the Clockwork and Simple clock cards. 
+A customizable lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses dayjs. Inspired by the Clockwork and Simple clock cards. 
 
 
 #### *Sample 3 (Clockwork style):*
 
-<img src="image-1.png" width="60%">
+
+<div style="width: 60%; height: 50%">
+  
+  ![](image-1.png)
+  
+</div>
+
 
 #### *Sample 1*
 
-<img src="image-3.png" width="50%">
+<div style="width: 60%; height: 50%">
+  
+  ![](image-3.png)
+  
+</div>
 
 #### *Sample 2*
 
-<img src="image-2.png" width="50%">
+
+<div style="width: 60%; height: 50%">
+  
+  ![](image-2.png)
+  
+</div>
 
 #### How to style 
 Style each time section (moment), with any style you want. You can even position each moment using CSS. Check out the full list of options to find out more.
@@ -190,6 +205,12 @@ These go inside `  - format: `
 ## Todo 
     [ ] Add locales (if there's demand)
     
+
+## Feature requests
+
+Requests for features can be submitted through an issue however would prefer you submit your own PR which I'll approve.
+
+
 ## DISCLAIMER
 
 Wrote this for personal use but decided to release it, no warranty.
