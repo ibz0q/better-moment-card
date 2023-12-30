@@ -78,10 +78,10 @@ Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be 
 |  | (parentStyle) |
 |  |  +------------+
 |  |  | moment-0   |
-|  |  | (style)   |
+|  |  | (style)    |
 |  |  +------------+
 |  |  | moment-1   |
-|  |  | (style)   |
+|  |  | (style)    |
 |  |  +------------+
 |  +---------------+
 +------------------+
