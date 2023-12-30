@@ -2,7 +2,7 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
-**Current Version: 2023.12.29.3**
+**Current Version: 2023.12.30.1**
  
 A customizable lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses dayjs. Inspired by the Clockwork and Simple clock cards. 
 
