@@ -8,15 +8,15 @@ A lovelace card that's highly customizable to show custom date/time, digital clo
 
 *Sample 3 (Clockwork style):*
 
-<img src="image-1.png" width="80%">
+<img src="image-1.png" width="60%">
 
 *Sample 1*
 
-<img src="image-3.png" width="60%">
+<img src="image-3.png" width="50%">
 
 *Sample 2*
 
-<img src="image-2.png" width="60%">
+<img src="image-2.png" width="50%">
 
 More examples 
 
