@@ -53,12 +53,12 @@ moment:
 ### Available options:
 ```Yaml
 type: custom:better-moment-card
-parentStyle: background-color:blue;
+parentStyle: background-color:blue; # CSS
 moment:
   - format: YYYY # Date format (table below)
-    timezone: Europe/Brussels #Uses IANA tz db format
-    style: font-size:2em; text-align:center; #CSS
-    template: | #HTML
+    timezone: Europe/Brussels # Uses IANA tz db format
+    style: font-size:2em; text-align:center; # CSS
+    template: | # Any HTML 
       Oh hi, it's <strong>{ { moment } }</strong> 
     # Oh hi, it's *2024*
 ```
