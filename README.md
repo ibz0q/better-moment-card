@@ -17,13 +17,7 @@ A lovelace card to show custom date/time, digital clocks using any datetime comb
 </div>
 
 #### How to style 
-Style each time section (moment), with any style you want. You can even position each moment using CSS. Check out the full list of options to find out more.
-
-<div style="width: 60%; height: 70%">
-  
-  ![](image.png)
-  
-</div>
+Style each ***moment*** with a style you want. See the **examples** section.
 
 ## Install with HACS
 
