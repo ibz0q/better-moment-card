@@ -90,9 +90,9 @@ type: custom:better-moment-card
 parentStyle: line-height:4em;
 moment:
   - format: HH:mm:ss
-    style: font-size:4em; text-align:center; font-weight:400;
+    parentStyle: font-size:4em; text-align:center; font-weight:400;
   - format: dddd, DD MMMM
-    style: font-size:1.6em; text-align:center;
+    parentStyle: font-size:1.6em; text-align:center;
 ```
 
 <div style="width: 60%; height: 50%">
@@ -106,9 +106,9 @@ moment:
 type: custom:better-moment-card
 moment:
   - format: HH:mm:ss
-    style: font-size:3em; text-align:center; padding:0 0 1em 0
+    parentStyle: font-size:3em; text-align:center; padding:0 0 1em 0
   - format: dddd, DD MMMM YY
-    style: font-size:2em; text-align:center;
+    parentStyle: font-size:2em; text-align:center;
 ```
 
 #### Style 3
@@ -134,21 +134,21 @@ parentStyle: |
     'date date brussells'; 
 moment:
   - format: HH:mm:ss
-    style: |
+    parentStyle: |
       font-size:4.4em; 
       text-align:center; 
       font-weight:400; 
       grid-area: time;
       font-weight:500
   - format: dddd, DD MMMM
-    style: |
+    parentStyle: |
       font-size:1.6em;
       line-height:1em; text-align:center;
       padding-top:0.5em;
       grid-area: date; 
   - format: HH:mm:ss
     timezone: Asia/Riyadh
-    style: |
+    parentStyle: |
       text-align:center; 
       line-height:2em; 
       padding-top:0.2em; 
@@ -158,7 +158,7 @@ moment:
       <div style="font-size:1.2em;">{{moment}}</div>
   - format: HH:mm:ss
     timezone: Europe/Brussels
-    style: |
+    parentStyle: |
       text-align:center; 
       line-height:2em; 
       grid-area: brussells;
