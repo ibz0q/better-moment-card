@@ -15,8 +15,6 @@ A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY 
   
 </div>
 
-#### How to style 
-Style each ***moment*** with a style you want. See the **examples** section.
 
 ## Install with HACS
 
@@ -24,7 +22,7 @@ To install via [HACS](https://hacs.xyz/) select the "Custom repositories" button
 
 After this navigate to "Frontend" click the plus symbol and enter "Better Moment Card" into the search bar. Then click on the first result.  and select "Install this repository in HACS" and you are done!
 
-## Manual Install
+## Manual Installation
 
 To install add it to your custom lovelace folder and then reference it accordingly
 
@@ -43,7 +41,7 @@ moment:
   - format: HH:mm:ss
 ```
 
-### All options:
+### All available options:
 
 ```Yaml
 type: custom:better-moment-card
@@ -69,7 +67,7 @@ moment:
 
 ```
 
-## Examples
+## Example styles
 
 <div style="width: 60%; height: 50%">
   
@@ -162,7 +160,9 @@ moment:
 
 ### DOM Tree
 
-Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent on instance div container. 
+Each instance (moment) gets it's own ID (moment-0, moment-1 etc), alternatively selected using card-mod.
+
+The `parentStyle` applies styling to the parent or instance div container. 
 
 ```
 +------------------+
@@ -182,10 +182,9 @@ Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be 
 +------------------+
 ```
 
-
 ### Timezones
 
-This will use your clients timezone. It does not use a Home Assistant time entity and there will be no support in adding this.
+This will use your browsers timezone. It does not use a Home Assistant time entity and a decision was made to not support this due to it causing performace issues. 
 
 Timezones need to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
 
@@ -225,7 +224,7 @@ These go inside ` - format: ` or `{{moment format=HH:mm}}`
 | `a`    | am pm            |                                       |
 
 ## Todo 
-    [ ] Add locales (if there's demand)
+    [ ] Add locales / internationalization (if demand requires)
     
 
 ## Feature requests
