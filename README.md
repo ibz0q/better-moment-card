@@ -69,13 +69,14 @@ moment:
 
 ## Example styles
 
+#### Style 1
+
 <div style="width: 60%; height: 50%">
   
   ![](image-3.png)
   
 </div>
 
-#### Style 1
 ```Yaml
 type: custom:better-moment-card
 parentStyle: line-height:4em;
@@ -86,13 +87,14 @@ moment:
     parentStyle: font-size:1.6em; text-align:center;
 ```
 
+#### Style 2
+
 <div style="width: 60%; height: 50%">
   
   ![](image-2.png)
   
 </div>
 
-#### Style 2
 ```Yaml
 type: custom:better-moment-card
 moment:
