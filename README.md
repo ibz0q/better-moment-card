@@ -16,24 +16,6 @@ A lovelace card to show custom date/time, digital clocks using any datetime comb
   
 </div>
 
-
-#### *Sample 1*
-
-<div style="width: 60%; height: 50%">
-  
-  ![](image-3.png)
-  
-</div>
-
-#### *Sample 2*
-
-
-<div style="width: 60%; height: 50%">
-  
-  ![](image-2.png)
-  
-</div>
-
 #### How to style 
 Style each time section (moment), with any style you want. You can even position each moment using CSS. Check out the full list of options to find out more.
 
@@ -73,11 +55,11 @@ moment:
 ```Yaml
 type: custom:better-moment-card
 parentStyle: background-color:blue; # CSS
-interval: 1000 # Specified in Milliseconds, how often DOM is written to (defaults to 1000-1 second)
+interval: 1000 # Milliseconds, how often DOM is written to (defaults to 1000 - every second)
 moment:
   - format: YYYY # Date format (table below)
     timezone: Europe/Brussels # Uses IANA tz db format
-    parentStyle: font-size:2em; text-align:center; # CSS applied to every moments instance container div (see DOM tree for "*parentStyle")
+    parentStyle: font-size:2em; text-align:center; # CSS for instance container div (see DOM tree for "*parentStyle")
     template: | 
       Oh hi, it's <strong>{{ moment }}</strong> 
     # Output: Oh hi, it's *2024*
@@ -94,7 +76,13 @@ moment:
 
 ```
 
-## Samples 
+## Examples
+
+<div style="width: 60%; height: 50%">
+  
+  ![](image-3.png)
+  
+</div>
 
 #### Style 1
 ```Yaml
@@ -107,6 +95,12 @@ moment:
     style: font-size:1.6em; text-align:center;
 ```
 
+<div style="width: 60%; height: 50%">
+  
+  ![](image-2.png)
+  
+</div>
+
 #### Style 2
 ```Yaml
 type: custom:better-moment-card
@@ -118,6 +112,14 @@ moment:
 ```
 
 #### Style 3
+
+<div style="width: 60%; height: 50%">
+  
+  ![](image-1.png)
+  
+</div>
+
+
 ```Yaml
 type: custom:better-moment-card
 parentStyle: |
@@ -167,9 +169,7 @@ moment:
 
 ### DOM Tree
 
-Customize styling using CSS: Use the inbuilt `style:` option to apply styling to the instance.
-
-Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
+Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent on instance div container. 
 
 ```
 +------------------+
