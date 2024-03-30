@@ -4,8 +4,7 @@
 
 **Current Version: 2024-03-30.1**
  
-A lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses dayjs. Inspired by the Clockwork and Simple clock cards. 
-
+A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY (See available formats below). Inspired by Clockwork card. 
 
 #### *Sample 3 (Clockwork style):*
 
@@ -190,11 +189,12 @@ This will use your clients timezone. It does not use a Home Assistant time entit
 
 Timezones need to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
 
-i.e. `timezone: Europe/London`
+i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
+
 
 ### Date/Time Formats
 
-These go inside `  - format: `
+These go inside ` - format: ` or `{{moment format=HH:mm}}`
 
 | Format | Output           | Description                           |
 | ------ | ---------------- | ------------------------------------- |
