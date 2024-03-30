@@ -7,28 +7,33 @@ class BetterMomentCard extends HTMLElement {
 	}
 	createTime() {
 		if (!this.content) {
-			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + '; line-height:normal;"' : "style='line-height:normal;'"}></div></ha-card>`;
+			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + ';"' : ""}></div></ha-card>`;
 			this.content = this.querySelector("div");
 			dayjs.extend(utc)
 			dayjs.extend(timezone)
 			var config = this.config, elm = [];
 			if (config.moment !== null && config.moment[0]) {
-				Object.keys(this.config.moment).forEach(k => {
+				Object.keys(config.moment).forEach(k => {
 					elm[k] = document.createElement('div');
 					elm[k].setAttribute("id", "moment-" + k);
-					this.config.moment[k].style ? elm[k].style.cssText = this.config.moment[k].style : null;
+					config.moment[k].parentStyle ? elm[k].style.cssText = config.moment[k].parentStyle : null;
 					this.content.appendChild(elm[k]);
 				});
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
-						var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss";
-						var time = config.moment[k].timezone ? dayjs().tz(config.moment[k].timezone).format(format) : dayjs().format(format); 
-						elm[k].innerHTML = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
+						if (config.moment[k].templateRaw) {
+							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?}}/g, (m, f, tz) => (tz ? dayjs().tz(tz.trim()).format(f) : dayjs().format(f) ));
+						} else {
+							var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss";
+							var time = config.moment[k].timezone ? dayjs().tz(config.moment[k].timezone).format(format) : dayjs().format(format);
+							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
+						}
+						elm[k].innerHTML = html
 					})
 				};
 				updateDom();
 				clearInterval(window.__global_minterval);
-				window.__global_minterval = setInterval(updateDom, 1000);
+				window.__global_minterval = setInterval(updateDom, (config.interval ? config.interval : 1000));
 			}
 		}
 	}

@@ -4,7 +4,7 @@
 
 **Current Version: 2023.12.30.1**
  
-A customizable lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses dayjs. Inspired by the Clockwork and Simple clock cards. 
+A lovelace card to show custom date/time, digital clocks using any datetime combination of your choosing i.e. DD/MM/YY HH:mm. Uses dayjs. Inspired by the Clockwork and Simple clock cards. 
 
 
 #### *Sample 3 (Clockwork style):*
@@ -61,51 +61,40 @@ resource:
 
 ## Configuration
 
-### Minimal config: 
+### Minimal required config: 
 ```Yaml
 type: custom:better-moment-card
 moment:
   - format: HH:mm:ss
 ```
 
-### Available options:
+### All options:
+
 ```Yaml
 type: custom:better-moment-card
 parentStyle: background-color:blue; # CSS
+interval: 1000 # Specified in Milliseconds, how often DOM is written to (defaults to 1000-1 second)
 moment:
   - format: YYYY # Date format (table below)
     timezone: Europe/Brussels # Uses IANA tz db format
-    style: font-size:2em; text-align:center; # CSS
-    template: | # Any HTML 
-      Oh hi, it's <strong>{ { moment } }</strong> 
-    # Oh hi, it's *2024*
+    parentStyle: font-size:2em; text-align:center; # CSS applied to every moments instance container div (see DOM tree for "*parentStyle")
+    template: | 
+      Oh hi, it's <strong>{{ moment }}</strong> 
+    # Output: Oh hi, it's *2024*
+  
+  - templateRaw: | # When specified, options format: and timezone: are ignored and expected inside {{moment format=* timezone=*}} instead 
+      It's currently <strong>{{ moment format=HH:mm }}</strong> 
+      # Output: It's currently 09:40 (Uses local timezone)
+      
+      It's <strong>{{ moment format=HH:mm:ss timezone=Europe/Berlin }}in Berlin</strong> 
+      # Overrides to Europe/Berlin timezone
+
+      Berlin is offset <strong>{{ moment format=ZZ timezone=Europe/Berlin }} from UTC</strong> 
+      # Ouput: Berlin is offset +0100 from UTC
+
 ```
 
-### Styling
-
-Customize styling using CSS: Use the inbuilt `style:` option to apply styling to the instance.
-
-Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
-
-```
-+------------------+
-|    HA-card       |
-|                  |
-|  +---------------+
-|  | card-content  |
-|  | (parentStyle) |
-|  |  +------------+
-|  |  | moment-0   |
-|  |  | (style)    |
-|  |  +------------+
-|  |  | moment-1   |
-|  |  | (style)    |
-|  |  +------------+
-|  +---------------+
-+------------------+
-```
-
-### Some sample ideas to get you started 
+## Samples 
 
 #### Style 1
 ```Yaml
@@ -143,28 +132,64 @@ parentStyle: |
     'date date brussells'; 
 moment:
   - format: HH:mm:ss
-    style: >
-      font-size:4.4em; text-align:center; font-weight:400; grid-area: time;
+    style: |
+      font-size:4.4em; 
+      text-align:center; 
+      font-weight:400; 
+      grid-area: time;
       font-weight:500
   - format: dddd, DD MMMM
-    style: >
-      font-size:1.6em; line-height:1em; text-align:center;padding-top:0.5em;
+    style: |
+      font-size:1.6em;
+      line-height:1em; text-align:center;
+      padding-top:0.5em;
       grid-area: date; 
   - format: HH:mm:ss
     timezone: Asia/Riyadh
     style: |
-      text-align:center; line-height:2em; padding-top:0.2em; grid-area: riyadh;
+      text-align:center; 
+      line-height:2em; 
+      padding-top:0.2em; 
+      grid-area: riyadh;
     template: |
       <strong>🇸🇦 Riyadh</strong>
       <div style="font-size:1.2em;">{{moment}}</div>
   - format: HH:mm:ss
     timezone: Europe/Brussels
     style: |
-      text-align:center; line-height:2em; grid-area: brussells;
+      text-align:center; 
+      line-height:2em; 
+      grid-area: brussells;
     template: |
       <strong>🇩🇪 Brussels</strong>
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
+
+### DOM Tree
+
+Customize styling using CSS: Use the inbuilt `style:` option to apply styling to the instance.
+
+Each instance (moment) gets it's own CSS ID (moment-0, moment-1 etc) and can be alternatively selected using card-mod. `parentStyle` applies styling to the parent div container. 
+
+```
++------------------+
+|    HA-card       |
+|                  |
+|  +---------------+
+|  | card-content  |
+|  | (parentStyle) |
+|  |  +------------+
+|  |  | moment-0   |
+|  |  | (*parentStyle)    |
+|  |  +------------+
+|  |  | moment-1   |
+|  |  | (*parentStyle)    |
+|  |  +------------+
+|  +---------------+
++------------------+
+```
+
+
 ### Timezones
 
 This will use your clients timezone. It does not use a Home Assistant time entity and there will be no support in adding this.
