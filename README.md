@@ -205,7 +205,7 @@ moment:
 
 ### Timezones
 
-By default, the plugin uses the browsers timezone. It does not use  Home Assistants time entity. A decision was made to not support this for several reasons i.e. performace issues, offline behavior and functionality issues.
+By default, the plugin uses the OS timezone. It does not use  Home Assistants time entity. A decision was made to not support this for several reasons i.e. performace issues, offline behavior and functionality issues.
 
 When you specify a timezone, it needs to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
 
