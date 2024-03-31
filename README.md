@@ -43,7 +43,7 @@ moment:
   - format: HH:mm:ss
 ```
 
-The card has no default styling applied to it, you can use the parentStyle on either the root or individual moments, as explained below.
+The card has no default styling applied so it may look bare, you can use the parentStyle on either the root or individual moments, as explained below and more in the DOM tree section.
 
 ### All available options:
 
@@ -54,7 +54,7 @@ interval: 1000 # Milliseconds, how often DOM is written to (defaults to 1000 - e
 moment:
   - format: YYYY # Date format (table below)
     timezone: Europe/Brussels # Uses IANA tz db format
-    parentStyle: font-size:2em; text-align:center; # CSS for instance container - See DOM Tree
+    parentStyle: font-size:2em; text-align:center; # CSS for indivdual instance - See DOM Tree
     template: | 
       It's <strong>{{ moment }}</strong> 
     # Output: It's *2024*
@@ -176,13 +176,13 @@ Each instance (moment) gets it's own ID too (moment-0, moment-1 etc), useful if 
 |                         |
 |  +----------------------+
 |  | card-content         |
-|  | (* parentStyle)      |
+|  | (parentStyle *)      |
 |  |  +-------------------+
 |  |  | moment-0          |
-|  |  | (** parentStyle)  |
+|  |  | (parentStyle **)  |
 |  |  +-------------------+
 |  |  | moment-1          |
-|  |  | (** parentStyle)  |
+|  |  | (parentStyle **)  |
 |  |  +-------------------+
 |  +----------------------+
 +-------------------------+
