@@ -6,7 +6,7 @@
  
 A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY (See available formats below). Inspired by Clockwork card. 
 
-#### *Sample 3 (Clockwork style):*
+#### *Screenshot (Clockwork style):*
 
 
 <div style="width: 60%; height: 50%">
@@ -20,17 +20,19 @@ A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY 
 
 To install via [HACS](https://hacs.xyz/) select the "Custom repositories" button add in the link in this format ***user* + *repository name***  (You can find this information at the top of the repository.  For category select  **Lovelace** then click "ADD".
 
-After this navigate to "Frontend" click the plus symbol and enter "Better Moment Card" into the search bar. Then click on the first result.  and select "Install this repository in HACS" and you are done!
+After this navigate to "Frontend" click the plus symbol and enter "Better Moment Card" into the search bar. Then click on the first result.  and select "Install this repository in HACS" and you are done.
 
 ## Manual Installation
 
-To install add it to your custom lovelace folder and then reference it accordingly
+Download the release file then create a folder  "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, then reference it accordingly inside Lovelace custom resources tab in the Dashboard.
 
 ```yaml
 resource:
   - url: /local/better-moment-card/better-moment-card.js
     type: js
 ```
+
+Refresh your browser and the plugin will load.
 
 ## Configuration
 
@@ -41,21 +43,23 @@ moment:
   - format: HH:mm:ss
 ```
 
+The card has no default styling applied to it, you can use the parentStyle on either the root or individual moments, as explained below.
+
 ### All available options:
 
 ```Yaml
 type: custom:better-moment-card
-parentStyle: background-color:blue; # CSS
+parentStyle: background-color:blue; # CSS applied to root card container - See DOM Tree
 interval: 1000 # Milliseconds, how often DOM is written to (defaults to 1000 - every second)
 moment:
   - format: YYYY # Date format (table below)
     timezone: Europe/Brussels # Uses IANA tz db format
-    parentStyle: font-size:2em; text-align:center; # CSS for instance container div (see DOM tree for "*parentStyle")
+    parentStyle: font-size:2em; text-align:center; # CSS for instance container - See DOM Tree
     template: | 
-      Oh hi, it's <strong>{{ moment }}</strong> 
-    # Output: Oh hi, it's *2024*
+      It's <strong>{{ moment }}</strong> 
+    # Output: It's *2024*
   
-  - templateRaw: | # When specified, options format: and timezone: are ignored and expected inside {{moment format=* timezone=*}} instead 
+  - templateRaw: | # If specified, format: and timezone: are ignored and expected inside {{moment format=* timezone=*}} 
       It's currently <strong>{{ moment format=HH:mm }}</strong> 
       # Output: It's currently 09:40 (Uses local timezone)
       
@@ -162,33 +166,48 @@ moment:
 
 ### DOM Tree
 
-Each instance (moment) gets it's own ID (moment-0, moment-1 etc), alternatively selected using card-mod.
-
 The `parentStyle` applies styling to the parent or instance div container. 
 
+Each instance (moment) gets it's own ID too (moment-0, moment-1 etc), useful if you're also using card-mod (optional).
+
 ```
-+------------------+
-|    HA-card       |
-|                  |
-|  +---------------+
-|  | card-content  |
-|  | (parentStyle) |
-|  |  +------------+
-|  |  | moment-0   |
-|  |  | (*parentStyle)    |
-|  |  +------------+
-|  |  | moment-1   |
-|  |  | (*parentStyle)    |
-|  |  +------------+
-|  +---------------+
-+------------------+
++-------------------------+
+|    HA-card              |
+|                         |
+|  +----------------------+
+|  | card-content         |
+|  | (* parentStyle)      |
+|  |  +-------------------+
+|  |  | moment-0          |
+|  |  | (** parentStyle)  |
+|  |  +-------------------+
+|  |  | moment-1          |
+|  |  | (** parentStyle)  |
+|  |  +-------------------+
+|  +----------------------+
++-------------------------+
+```
+
+YAML Illustration (see asterix *)
+```
+type: custom:better-moment-card
+parentStyle: |       *
+  line-height:normal;
+    'date date brussells'; 
+moment:
+  - format: HH:mm:ss
+    parentStyle: |   **
+      font-size:4.4em;
+  - format: HH:mm:ss
+    parentStyle: |   **
+      font-size:4.4em;
 ```
 
 ### Timezones
 
-This will use your browsers timezone. It does not use a Home Assistant time entity and a decision was made to not support this due to it causing performace issues. 
+By default, the plugin uses the browsers timezone. It does not use  Home Assistants time entity. A decision was made to not support this for several reasons i.e. performace issues, offline behavior and functionality issues.
 
-Timezones need to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
+When you specify a timezone, it needs to be in the IANA format in tz database, you can find them here: https://nodatime.org/TimeZones
 
 i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
