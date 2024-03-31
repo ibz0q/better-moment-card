@@ -4,7 +4,7 @@
 
 **Current Version: 2024-03-30.1**
  
-A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY (See available formats below). Inspired by Clockwork card. 
+A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY. Inspired by Clockwork card. 
 
 #### *Screenshot (Clockwork style):*
 
