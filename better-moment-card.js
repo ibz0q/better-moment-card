@@ -1,6 +1,8 @@
 import dayjs from "./dayjs.min.js";
 import utc from "./timezone.js";
 import timezone from "./utc.js";
+var __global_minterval = {};
+
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
 		this.createTime()
@@ -32,8 +34,8 @@ class BetterMomentCard extends HTMLElement {
 					})
 				};
 				updateDom();
-				clearInterval(window.__global_minterval);
-				window.__global_minterval = setInterval(updateDom, (config.interval ? config.interval : 1000));
+				clearInterval(__global_minterval);
+				__global_minterval = setInterval(updateDom, (config.interval ? config.interval : 1000));
 			}
 		}
 	}
