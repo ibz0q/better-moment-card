@@ -6,9 +6,6 @@
  
 A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY. Inspired by Clockwork card. 
 
-#### *Screenshot (Clockwork style):*
-
-
 <div style="width: 60%; height: 50%">
   
   ![](image-1.png)
@@ -17,10 +14,7 @@ A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY.
 
 
 ## Install with HACS
-
-To install via [HACS](https://hacs.xyz/) select the "Custom repositories" button add in the link in this format ***user* + *repository name***  (You can find this information at the top of the repository.  For category select  **Lovelace** then click "ADD".
-
-After this navigate to "Frontend" click the plus symbol and enter "Better Moment Card" into the search bar. Then click on the first result.  and select "Install this repository in HACS" and you are done.
+Search "Better Moment Card" in HACs and click Downlad.
 
 ## Manual Installation
 
@@ -34,16 +28,20 @@ resource:
 
 Refresh your browser and the plugin will load.
 
-## Configuration
+# Configuration
 
-### Minimal required config: 
+### Minimum 
 ```Yaml
 type: custom:better-moment-card
 moment:
   - format: HH:mm:ss
 ```
 
-The card has no default styling applied so it may look bare, you can use the parentStyle on either the root or individual moments, as explained below and more in the DOM tree section.
+This will have no default styling applied to it so it may look bare. 
+
+1. Either apply styling using the parentStyle
+
+2. Use example style below to help you.
 
 ### All available options:
 
@@ -72,6 +70,8 @@ moment:
 ```
 
 ## Example styles
+
+Select your preferred style and copy and paste the YAML into Lovelace
 
 #### Style 1
 
