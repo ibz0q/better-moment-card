@@ -2,7 +2,7 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 
-**Current Version: 2024-03-30.1**
+**Current Release: 2024-03-30.1**
  
 A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY. Inspired by Clockwork card. 
 
@@ -14,7 +14,7 @@ A lovelace card to show time & date exactly how you want e.g. HH:mm:ss DD/MM/YY.
 
 
 ## Install with HACS
-Search "Better Moment Card" in HACs and click Downlad.
+Search "Better Moment Card" in HACs and click Download.
 
 ## Manual Installation
 
