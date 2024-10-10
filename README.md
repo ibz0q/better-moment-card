@@ -218,11 +218,15 @@ This feature uses Intl API built into modern browsers and there's many advantage
 
 #### Example: 
 
+You can use locale features by specifying a locale name.
+
 i.e. `locale: ar` or `{{moment locale=ar}}`
 
-The code exposes the time frameworks API directly (Luxon) to reduce maintenace overhead, it also exposes granular locale features such as toLocaleString which allows specifying smaller details. 
+The code exposes frameworks API directly (Luxon) to reduce maintenace overhead.
 
-IF you wish to use this feature, it requires you to read the Luxon documentation around Intl.
+There's granular locale features such as toLocaleString which allows specifying smaller details. 
+
+If you wish to use this feature, it requires you to read the Luxon documentation around Intl.
 
 Here's an example of how you use this API. 
 
