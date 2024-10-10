@@ -1,8 +1,4 @@
-import dayjs from "./dayjs.min.js";
-import utc from "./timezone.js";
-import timezone from "./utc.js";
-var __global_minterval = {};
-
+import { DateTime } from "./luxon.min.js";
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
 		this.createTime()
@@ -11,8 +7,6 @@ class BetterMomentCard extends HTMLElement {
 		if (!this.content) {
 			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + ';"' : ""}></div></ha-card>`;
 			this.content = this.querySelector("div");
-			dayjs.extend(utc)
-			dayjs.extend(timezone)
 			var config = this.config, elm = [];
 			if (config.moment !== null && config.moment[0]) {
 				Object.keys(config.moment).forEach(k => {
@@ -21,21 +15,32 @@ class BetterMomentCard extends HTMLElement {
 					config.moment[k].parentStyle ? elm[k].style.cssText = config.moment[k].parentStyle : null;
 					this.content.appendChild(elm[k]);
 				});
+				let timeMatrix = (f = "HH:mm:ss", tz, loc, locs) => {
+					let dt = DateTime.now(); if (tz) dt = dt.setZone(tz); if (loc) dt = dt.setLocale(loc);
+					return locs ? dt.toLocaleString(locs) : dt.toFormat(f);
+				};
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
 						if (config.moment[k].templateRaw) {
-							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?}}/g, (m, f, tz) => (tz ? dayjs().tz(tz.trim()).format(f) : dayjs().format(f) ));
+							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g,
+								(m, f, tz, loc, locs) => {
+									const locsParsed = locs ? locs.split(',').reduce((locObj, item) => {
+										const [key, value] = item.split('[');
+										if (value) locObj[key.trim()] = value.replace(']', '').trim();
+										return locObj;
+									}, {}) : null;
+									return timeMatrix(f, tz || null, loc || null, locsParsed);
+								}
+							)
 						} else {
-							var format = config.moment[k].format ? config.moment[k].format : "HH:mm:ss";
-							var time = config.moment[k].timezone ? dayjs().tz(config.moment[k].timezone).format(format) : dayjs().format(format);
+							var time = timeMatrix(config.moment[k].format, config.moment[k].timezone || 0, config.moment[k].locale || 0, config.moment[k].localeString || 0);
 							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
 						}
 						elm[k].innerHTML = html
 					})
 				};
 				updateDom();
-				clearInterval(__global_minterval);
-				__global_minterval = setInterval(updateDom, (config.interval ? config.interval : 1000));
+				setInterval(updateDom, (config.interval ? config.interval : 1000));
 			}
 		}
 	}
@@ -49,5 +54,23 @@ class BetterMomentCard extends HTMLElement {
 	getCardSize() {
 		return 2;
 	}
+	getLayoutOptions() {
+		return {
+			grid_rows: 3,
+			grid_columns: 4,
+			grid_min_rows: 3,
+			grid_max_rows: 3,
+		};
+	}
+	static getStubConfig() {
+		return { "type": "custom:better-moment-card", "parentStyle": "line-height:normal;\n", "moment": [{ "parentStyle": "font-size:4em;  text-align:center; font-weight:400;\n", "templateRaw": "{{moment format=HH:mm:ss}}\n" }, { "parentStyle": "font-size:1.9em; text-align:center; margin-top:5px;\n", "templateRaw": "{{moment format=dddd, DD MMMM}}\n" }] }
+	}
 }
 customElements.define('better-moment-card', BetterMomentCard);
+window.customCards = window.customCards || [];
+window.customCards.push({
+	type: "better-moment-card",
+	name: "Better Moment Card",
+	preview: true,
+	documentationURL: "https://github.com/ibz0q/better-moment-card"
+});
