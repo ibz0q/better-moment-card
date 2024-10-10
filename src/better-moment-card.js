@@ -16,22 +16,14 @@ class BetterMomentCard extends HTMLElement {
 					this.content.appendChild(elm[k]);
 				});
 				let timeMatrix = (f = "HH:mm:ss", tz, loc, locs) => {
+					locs = (typeof locs === 'string') ? (JSON.parse(locs) || false) : locs;
 					let dt = DateTime.now(); if (tz) dt = dt.setZone(tz); if (loc) dt = dt.setLocale(loc);
 					return locs ? dt.toLocaleString(locs) : dt.toFormat(f);
 				};
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
 						if (config.moment[k].templateRaw) {
-							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g,
-								(m, f, tz, loc, locs) => {
-									const locsParsed = locs ? locs.split(',').reduce((locObj, item) => {
-										const [key, value] = item.split('[');
-										if (value) locObj[key.trim()] = value.replace(']', '').trim();
-										return locObj;
-									}, {}) : null;
-									return timeMatrix(f, tz || null, loc || null, locsParsed);
-								}
-							)
+							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (timeMatrix(f, tz || 0, loc || 0, locs)));
 						} else {
 							var time = timeMatrix(config.moment[k].format, config.moment[k].timezone || 0, config.moment[k].locale || 0, config.moment[k].localeString || 0);
 							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
@@ -63,7 +55,7 @@ class BetterMomentCard extends HTMLElement {
 		};
 	}
 	static getStubConfig() {
-		return { "type": "custom:better-moment-card", "parentStyle": "line-height:normal;\n", "moment": [{ "parentStyle": "font-size:4em;  text-align:center; font-weight:400;\n", "templateRaw": "{{moment format=HH:mm:ss}}\n" }, { "parentStyle": "font-size:1.9em; text-align:center; margin-top:5px;\n", "templateRaw": "{{moment format=dddd, DD MMMM}}\n" }] }
+		return { "type": "custom:better-moment-card", "parentStyle": "line-height:normal;\n", "moment": [{ "parentStyle": "font-size:4em;  text-align:center; font-weight:400;\n", "templateRaw": "{{moment format=HH:mm:ss}}\n" }, { "parentStyle": "font-size:1.9em; text-align:center; margin-top:5px;\n", "templateRaw": "{{moment format=DDD}}\n" }] }
 	}
 }
 customElements.define('better-moment-card', BetterMomentCard);
