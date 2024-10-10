@@ -232,9 +232,9 @@ The code exposes frameworks API directly (Luxon) to reduce maintenace overhead. 
 
 Example:
 
-i.e. `locale: ar` or `{{moment locale=ar localeSetting={"year": "numeric","month": "long","day": "numeric","hour":"numeric","minute": "2-digit","timeZoneName": "short"} }}`
+i.e. `localeSetting: .... year: numeric.... (Full ref above)` or `{{moment locale=ar localeSetting={"year": "numeric","month": "long","day": "numeric","hour":"numeric","minute": "2-digit","timeZoneName": "short"} }}`
 
-`localeSetting` expects a properly formatted JSON string, if you face issues please check using an online linter and ensure you are passing in a valid JSON string.
+When using `localeSetting` inside a template, it expects a properly formatted JSON string, if you face issues please check using an online linter and ensure you are passing in a valid JSON string.
 
 ### Date/Time Formats
 
