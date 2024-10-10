@@ -52,19 +52,29 @@ interval: 1000 # Milliseconds, how often DOM is written to (defaults to 1000 - e
 moment:
   - format: yyyy # Date format (table below)
     timezone: Europe/Brussels # Uses IANA tz db format
+    locale: ar
+    localeSetting:
+        year: "numeric"
+        month: "long"
+        day: "numeric"
+        hour: "numeric"
+        minute: "2-digit"
+        timeZoneName: "short"
     parentStyle: font-size:2em; text-align:center; # CSS for indivdual instance - See DOM Tree
     template: | 
       It's <strong> {{moment}} </strong> 
     # Output: It's *2024*
   
   - templateRaw: | # If specified, format: and timezone: are ignored and expected inside {{moment format=* timezone=*}} 
-      It's currently <strong> {{ moment format=HH:mm }} </strong> 
+      It's currently <strong> {{moment format=HH:mm}} </strong> 
       # Output: It's currently 09:40 (Uses local timezone)
       
-      It's <strong>{{moment format=HH:mm:ss timezone=Europe/Berlin}} in Berlin</strong> 
+      It's <strong> {{moment format=HH:mm:ss timezone=Europe/Berlin}} in Berlin</strong> 
       # Overrides to Europe/Berlin timezone
 
-      Berlin is offset <strong>{{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> 
+      This is what the time looks like in <strong> {{moment format=HH:mm:ss locale=ar}} in Arabic</strong> 
+
+      Berlin is offset <strong> {{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> 
       # Ouput: Berlin is offset +0100 from UTC
 
 ```
@@ -216,9 +226,7 @@ i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
 This feature uses Intl API built into modern browsers and there's many advantages to this but one side effect is this API may not be available on all browsers (See support here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl).
 
-#### Example: 
-
-You can use locale features by specifying a locale name.
+You can use this features by specifying a locale:
 
 i.e. `locale: ar` or `{{moment locale=ar}}`
 

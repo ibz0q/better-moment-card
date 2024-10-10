@@ -16,7 +16,7 @@ class BetterMomentCard extends HTMLElement {
 					this.content.appendChild(elm[k]);
 				});
 				let timeMatrix = (f = "HH:mm:ss", tz, loc, locs) => {
-					locs = (typeof locs === 'string') ? (JSON.parse(locs) || false) : locs;
+					locs = (typeof locs === 'string') ? (JSON.parse(locs) || 0) : locs;
 					let dt = DateTime.now(); if (tz) dt = dt.setZone(tz); if (loc) dt = dt.setLocale(loc);
 					return locs ? dt.toLocaleString(locs) : dt.toFormat(f);
 				};
@@ -25,7 +25,7 @@ class BetterMomentCard extends HTMLElement {
 						if (config.moment[k].templateRaw) {
 							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (timeMatrix(f, tz || 0, loc || 0, locs)));
 						} else {
-							var time = timeMatrix(config.moment[k].format, config.moment[k].timezone || 0, config.moment[k].locale || 0, config.moment[k].localeString || 0);
+							let time = timeMatrix(config.moment[k].format, config.moment[k].timezone || 0, config.moment[k].locale || 0, config.moment[k].localeString || 0);
 							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
 						}
 						elm[k].innerHTML = html
