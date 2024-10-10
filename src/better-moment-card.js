@@ -55,7 +55,7 @@ class BetterMomentCard extends HTMLElement {
 		};
 	}
 	static getStubConfig() {
-		return { "type": "custom:better-moment-card", "parentStyle": "line-height:normal;\n", "moment": [{ "parentStyle": "font-size:4em;  text-align:center; font-weight:400;\n", "templateRaw": "{{moment format=HH:mm:ss}}\n" }, { "parentStyle": "font-size:1.9em; text-align:center; margin-top:5px;\n", "templateRaw": "{{moment format=DDD}}\n" }] }
+		return { "type": "custom:better-moment-card", "parentStyle": "line-height:normal;\n", "moment": [{ "parentStyle": "font-size:4em;  text-align:center; font-weight:400;\n", "templateRaw": "{{moment format=HH:mm:ss}}\n" }, { "parentStyle": "font-size:1.9em; text-align:center; margin-top:5px;\n", "templateRaw": "{{moment format=cccc, dd LLLL}}\n" }] }
 	}
 }
 customElements.define('better-moment-card', BetterMomentCard);

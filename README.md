@@ -50,21 +50,21 @@ type: custom:better-moment-card
 parentStyle: background-color:blue; # CSS applied to root card container - See DOM Tree
 interval: 1000 # Milliseconds, how often DOM is written to (defaults to 1000 - every second)
 moment:
-  - format: YYYY # Date format (table below)
+  - format: yyyy # Date format (table below)
     timezone: Europe/Brussels # Uses IANA tz db format
     parentStyle: font-size:2em; text-align:center; # CSS for indivdual instance - See DOM Tree
     template: | 
-      It's <strong>{{ moment }}</strong> 
+      It's <strong> {{moment}} </strong> 
     # Output: It's *2024*
   
   - templateRaw: | # If specified, format: and timezone: are ignored and expected inside {{moment format=* timezone=*}} 
-      It's currently <strong>{{ moment format=HH:mm }}</strong> 
+      It's currently <strong> {{ moment format=HH:mm }} </strong> 
       # Output: It's currently 09:40 (Uses local timezone)
       
-      It's <strong>{{ moment format=HH:mm:ss timezone=Europe/Berlin }}in Berlin</strong> 
+      It's <strong>{{moment format=HH:mm:ss timezone=Europe/Berlin}} in Berlin</strong> 
       # Overrides to Europe/Berlin timezone
 
-      Berlin is offset <strong>{{ moment format=ZZ timezone=Europe/Berlin }} from UTC</strong> 
+      Berlin is offset <strong>{{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> 
       # Ouput: Berlin is offset +0100 from UTC
 
 ```
@@ -87,7 +87,7 @@ parentStyle: line-height:4em;
 moment:
   - format: HH:mm:ss
     parentStyle: font-size:4em; text-align:center; font-weight:400;
-  - format: dddd, DD MMMM
+  - format: cccc, dd MMMM
     parentStyle: font-size:1.6em; text-align:center;
 ```
 
@@ -104,8 +104,8 @@ type: custom:better-moment-card
 moment:
   - format: HH:mm:ss
     parentStyle: font-size:3em; text-align:center; padding:0 0 1em 0
-  - format: dddd, DD MMMM YY
-    parentStyle: font-size:2em; text-align:center;
+  - format: cccc, dd MMMM yy
+    parentStyle: font-size:2em; text-align:center;```
 ```
 
 #### Style 3
@@ -137,7 +137,7 @@ moment:
       font-weight:400; 
       grid-area: time;
       font-weight:500
-  - format: dddd, DD MMMM
+  - format: cccc, dd MMMM
     parentStyle: |
       font-size:1.6em;
       line-height:1em; text-align:center;
@@ -211,6 +211,24 @@ When you specify a timezone, it needs to be in the IANA format in tz database, y
 
 i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
+
+### Internationalization / Locales
+
+This feature uses Intl API built into modern browsers and there's many advantages to this but one side effect is this API may not be available on all browsers (See support here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl).
+
+#### Example: 
+
+i.e. `locale: ar` or `{{moment locale=ar}}`
+
+The code exposes the time frameworks API directly (Luxon) to reduce maintenace overhead, it also exposes granular locale features such as toLocaleString which allows specifying smaller details. 
+
+IF you wish to use this feature, it requires you to read the Luxon documentation around Intl.
+
+Here's an example of how you use this API. 
+
+i.e. `locale: ar` or `{{moment locale=ar localeSetting={"year": "numeric","month": "long","day": "numeric","hour":"numeric","minute": "2-digit","timeZoneName": "short"} }}`
+
+`localeSetting` expects a properly formatted JSON string, if you face issues please check using an online linter and ensure you are passing in a valid JSON string.
 
 ### Date/Time Formats
 
@@ -292,7 +310,6 @@ These go inside ` - format: ` or `{{moment format=HH:mm}}`
 | x                |              | unix timestamp in milliseconds                                 | `1407287224054`                                               |
 
 ## Todo 
-    [ ] Add locales / internationalization (if demand requires)
     [ ] Add tests
     
 
