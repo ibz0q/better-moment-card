@@ -224,19 +224,13 @@ i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
 ### Internationalization / Locales
 
-This feature uses Intl API built into modern browsers and there's many advantages to this but one side effect is this API may not be available on all browsers (See support here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl).
-
-You can use this features by specifying a locale:
+This feature uses Intl API built into modern browsers and there's many advantages to this but one side effect is this API may not be available on all browsers (See support here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). You can use this features by specifying a locale:
 
 i.e. `locale: ar` or `{{moment locale=ar}}`
 
-The code exposes frameworks API directly (Luxon) to reduce maintenace overhead.
+The code exposes frameworks API directly (Luxon) to reduce maintenace overhead. There's granular locale features such as toLocaleString which allows specifying smaller details. If you wish to use this feature, it requires you to read the Luxon documentation around Intl.
 
-There's granular locale features such as toLocaleString which allows specifying smaller details. 
-
-If you wish to use this feature, it requires you to read the Luxon documentation around Intl.
-
-Here's an example of how you use this API. 
+Example:
 
 i.e. `locale: ar` or `{{moment locale=ar localeSetting={"year": "numeric","month": "long","day": "numeric","hour":"numeric","minute": "2-digit","timeZoneName": "short"} }}`
 
