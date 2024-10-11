@@ -47,12 +47,7 @@ class BetterMomentCard extends HTMLElement {
 		return 2;
 	}
 	getLayoutOptions() {
-		return {
-			grid_rows: 3,
-			grid_columns: 4,
-			grid_min_rows: 3,
-			grid_max_rows: 3,
-		};
+		return { grid_rows: 3, grid_columns: 4, grid_min_rows: 3, grid_max_rows: 3 };
 	}
 	static getStubConfig() {
 		return { "type": "custom:better-moment-card", "parentStyle": "line-height:normal;\n", "moment": [{ "parentStyle": "font-size:4em;  text-align:center; font-weight:400;\n", "templateRaw": "{{moment format=HH:mm:ss}}\n" }, { "parentStyle": "font-size:1.9em; text-align:center; margin-top:5px;\n", "templateRaw": "{{moment format=cccc, dd LLLL}}\n" }] }
@@ -60,9 +55,4 @@ class BetterMomentCard extends HTMLElement {
 }
 customElements.define('better-moment-card', BetterMomentCard);
 window.customCards = window.customCards || [];
-window.customCards.push({
-	type: "better-moment-card",
-	name: "Better Moment Card",
-	preview: true,
-	documentationURL: "https://github.com/ibz0q/better-moment-card"
-});
+window.customCards.push({ type: "better-moment-card", name: "Better Moment Card", preview: true, documentationURL: "https://github.com/ibz0q/better-moment-card" });
