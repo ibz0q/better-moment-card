@@ -1,31 +1,24 @@
+name: Release Dist Zip
 
-# name: Release
+on: 
+  release:
+    types: [published]
 
-# on:
-#   release:
-#     types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# jobs:
-#   release:
-#     name: Prepare release
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v1
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
 
-#       # Build
-#       - name: Build the file
-#         run: |
-#           cd /home/runner/work/boilerplate-card/boilerplate-card
-#           npm install
-#           npm run build
+    - name: Zip dist folder
+      run: zip -r better-moment-card.zip dist/
 
-#       # Upload build file to the releas as an asset.
-#       - name: Upload zip to release
-#         uses: svenstaro/upload-release-action@v1-release
-
-#         with:
-#           repo_token: ${{ secrets.GITHUB_TOKEN }}
-#           file: /home/runner/work/boilerplate-card/boilerplate-card/dist/boilerplate-card.js
-#           asset_name: better-moment-card.js
-#           tag: ${{ github.ref }}
-#           overwrite: true
+    - name: Upload better-moment-card.zip as release asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./better-moment-card.zip
+        asset_name: better-moment-card.zip
+        asset_content_type: application/zip
