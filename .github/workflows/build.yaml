@@ -1,0 +1,40 @@
+name: Build
+
+on: 
+  push:
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Copy files from ./src to ./dist
+      run: |
+        mkdir -p ./dist
+        cp -r ./src/* ./dist/
+
+    - name: Minify files with Terser
+      run: |
+        for file in dist/*.js; do
+          npx terser "$file" -o "$file"
+        done
+
+    - name: Commit and Push only dist files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add dist/
+        git commit -m "Minified files and copied to dist" || exit 0
+        git push
