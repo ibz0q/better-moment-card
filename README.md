@@ -8,13 +8,30 @@ A lovelace card to show date & time exactly how you want.
 
 <span style="width: 100%; height: 50%">
   
-  ![](docs/image-1.png)
+  ![](docs/image-3.png)
   
 </span>
 
 ## Examples
 
 #### Style 1
+
+<div style="width: 60%; height: 50%">
+  
+  ![](docs/image-2.png)
+  
+</div>
+
+```Yaml
+type: custom:better-moment-card
+moment:
+  - format: HH:mm:ss
+    parentStyle: font-size:3em; text-align:center; padding:0 0 1em 0
+  - format: cccc, dd MMMM yy
+    parentStyle: font-size:2em; text-align:center;```
+```
+
+#### Style 2
 
 <div style="width: 60%; height: 50%">
   
@@ -32,29 +49,12 @@ moment:
     parentStyle: font-size:1.6em; text-align:center;
 ```
 
-#### Style 2
-
-<div style="width: 60%; height: 50%">
-  
-  ![](docs/image-2.png)
-  
-</div>
-
-```Yaml
-type: custom:better-moment-card
-moment:
-  - format: HH:mm:ss
-    parentStyle: font-size:3em; text-align:center; padding:0 0 1em 0
-  - format: cccc, dd MMMM yy
-    parentStyle: font-size:2em; text-align:center;```
-```
 
 #### Style 3
 
 <div style="width: 60%; height: 50%">
   
-  ![](docs/image-1.png)
-  
+  ![](docs/image4.png)
 </div>
 
 
