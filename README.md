@@ -1,16 +1,18 @@
 # Better Moment Card
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
- 
-A lovelace card to show time & date how you want e.g. HH:mm:ss DD/MM/YY. 
+A lovelace card to show date & time exactly how you want.
 
-<div style="width: 50%; height: 50%">
+- Custom fonts
+- HTML/CSS Templating
+- Timezone and Locale support
+
+<span style="width: 100%; height: 50%">
   
   ![](docs/image-1.png)
   
-</div>
+</span>
 
-# Examples
+## Examples
 
 #### Style 1
 
@@ -99,7 +101,7 @@ moment:
       line-height:2em; 
       grid-area: brussells;
     template: |
-      <strong>🇩🇪 Brussels</strong>
+      <strong>🇧🇪 Brussels</strong>
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
 
@@ -120,13 +122,15 @@ This will have no default styling applied to it so it may look bare.
 
 ```Yaml
 type: custom:better-moment-card
-parentStyle: background-color:blue; # CSS applied to root card container - See DOM Tree
-interval: 1000 # Milliseconds, how often DOM is written to (defaults to 1000 - every second)
+parentStyle: > # CSS applied to root card container (See DOM Tree) 
+  font-family: Avant Garde,Avantgarde,Century
+  Gothic,CenturyGothic,AppleGothic,sans-serif; 
+interval: 1000 # In milliseconds: how often DOM is written to (defaults to 1000 - every second)
 moment:
   - format: yyyy # Date format (table below)
-    timezone: Europe/Brussels # Uses IANA tz db format
-    locale: ar
-    localeSetting:
+    timezone: Europe/Brussels # Uses IANA format or "useHass" to use Home Assistants user timezone.
+    locale: ar # See Luxon.js API docs for all languages
+    localeSetting: # See Luxon.js API docs
         year: "numeric"
         month: "long"
         day: "numeric"
@@ -158,7 +162,7 @@ Search "Better Moment Card" in HACs and click Download.
 
 ## Manual Install
 
-Download the release file then create a folder  "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, then reference it accordingly inside Lovelace custom resources tab in the Dashboard.
+Download the release file then create a folder "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, then reference it accordingly inside Lovelace custom resources tab in the Dashboard.
 
 ```yaml
 resource:
@@ -234,7 +238,7 @@ These go inside ` - format: ` or `{{moment format=HH:mm}}`
 
 
 | Standalone token | Format token | Description                                                    | Example                                                       |
-|------------------| ------------ |----------------------------------------------------------------| ------------------------------------------------------------- |
+| ---------------- | ------------ | -------------------------------------------------------------- | ------------------------------------------------------------- |
 | S                |              | millisecond, no padding                                        | `54`                                                          |
 | SSS              |              | millisecond, padded to 3                                       | `054`                                                         |
 | u                |              | fractional seconds, functionally identical to SSS              | `054`                                                         |

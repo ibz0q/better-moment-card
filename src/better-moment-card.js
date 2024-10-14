@@ -1,11 +1,11 @@
 import { DateTime } from "./luxon.min.js";
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
-		this.createTime()
+		this.createTime(hass)
 	}
-	createTime() {
+	createTime(hass) {
 		if (!this.content) {
-			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + ';"' : ""}></div></ha-card>`;
+			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + ';"' : ""}></div>${this.config.parentHTML ? '' + this.config.parentHTML + '' : ""}</ha-card>`;
 			this.content = this.querySelector("div");
 			var config = this.config, elm = [];
 			if (config.moment !== null && config.moment[0]) {
@@ -15,18 +15,18 @@ class BetterMomentCard extends HTMLElement {
 					config.moment[k].parentStyle ? elm[k].style.cssText = config.moment[k].parentStyle : null;
 					this.content.appendChild(elm[k]);
 				});
-				let timeMatrix = (f = "HH:mm:ss", tz, loc, locs) => {
+				let dtMatrix = (f = "HH:mm:ss", tz, loc, locs) => {
 					locs = (typeof locs === 'string') ? (JSON.parse(locs) || 0) : locs;
-					let dt = DateTime.now(); if (tz) dt = dt.setZone(tz); if (loc) dt = dt.setLocale(loc);
+					let dt = DateTime.now(); if (tz) dt = dt.setZone((tz == "useHass" ? hass.config.timezone : tz)); if (loc) dt = dt.setLocale(loc);
 					return locs ? dt.toLocaleString(locs) : dt.toFormat(f);
 				};
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
 						if (config.moment[k].templateRaw) {
-							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (timeMatrix(f, tz || 0, loc || 0, locs)));
+							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (dtMatrix(f, tz || 0, loc || 0, locs)));
 						} else {
-							let time = timeMatrix(config.moment[k].format, config.moment[k].timezone || 0, config.moment[k].locale || 0, config.moment[k].localeString || 0);
-							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, time) : time
+							let dt = dtMatrix(config.moment[k].format, config.moment[k].timezone || 0, config.moment[k].locale || 0, config.moment[k].localeString || 0);
+							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, dt) : dt
 						}
 						elm[k].innerHTML = html
 					})
