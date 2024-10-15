@@ -1,18 +1,20 @@
 # Better Moment Card
 
-A lovelace card to show date & time exactly how you want.
+A lovelace card to show time/dates exactly how you want on your dashboards.
 
+<p align="center" style="width: 60%; height: 50%">
+
+[<img src="docs/preview-output.gif">](docs/preview-output.mp4)
+</p>
+
+Features: 
+- Infinitely customizable
 - Custom fonts
-- HTML/CSS Templating
+- HTML/CSS templating
 - Timezone and Locale support
+- Sample styles provided
 
-<span style="width: 100%; height: 50%">
-  
-  ![](docs/image-3.png)
-  
-</span>
-
-## Examples
+### Examples Styles
 
 #### Style 1
 
