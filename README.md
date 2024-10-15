@@ -1,10 +1,11 @@
 # Better Moment Card
 
-A lovelace card to show time/dates exactly how you want on your dashboards.
+A lovelace card to show time/dates exactly how you want on your dashboard.
 
 <p align="center" style="width: 60%; height: 50%">
 
-[<img src="docs/preview-output.gif">](docs/preview-output.mp4)
+[<img src="docs/preview-output.gif">](docs/preview-output.gif)
+
 </p>
 
 Features: 
