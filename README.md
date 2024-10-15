@@ -4,7 +4,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 
 <p align="center" style="width: 60%; height: 50%">
 
-[<img src="docs/live-preview.gif">](docs/live-preview.gif)
+[<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
 </p>
 
 Features: 
