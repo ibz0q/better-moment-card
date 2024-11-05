@@ -56,7 +56,7 @@ moment:
 
 <div style="width: 60%; height: 50%">
   
-  ![](docs/image4.png)
+  ![](docs/image-1.png)
 </div>
 
 
@@ -114,11 +114,11 @@ moment:
   - format: HH:mm:ss
 ```
 
-This will have no default styling applied to it so it may look bare. 
+This will have no default styling applied to it so it may look bare. This is intentional, so users can customize how they want without using messy CSS !overrides.
 
 1. Either apply styling using the parentStyle
 
-2. Use example style below to help you.
+2. Use example style above to help you.
 
 ### All parameters:
 
@@ -144,7 +144,7 @@ moment:
       It's <strong> {{moment}} </strong> 
     # Output: It's *2024*
   
-  - templateRaw: | # If specified, format: and timezone: are ignored and expected inside {{moment format=* timezone=*}} 
+  - templateRaw: | # If specified, format, timezone, locale, localeSettings are ignored and can be passed inside {{moment format=* timezone=*}}, each array containing templateRaw multiple moments can be supplied.  
       It's currently <strong> {{moment format=HH:mm}} </strong> 
       # Output: It's currently 09:40 (Uses local timezone)
       
@@ -157,7 +157,6 @@ moment:
       # Ouput: Berlin is offset +0100 from UTC
 
 ```
-
 ## Install with HACS
 
 Search "Better Moment Card" in HACs and click Download.
