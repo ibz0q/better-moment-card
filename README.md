@@ -7,7 +7,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 [<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
 </p>
 
-Features: 
+**Features:**
 - Infinitely customizable
 - Custom fonts
 - HTML/CSS templating
