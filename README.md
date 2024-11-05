@@ -214,7 +214,7 @@ moment:
 
 ### Timezones
 
-By default, the plugin uses the OS timezone. It does not use  Home Assistants time entity (for  performace reasons, offline behavior and offline functionality). When you specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
+By default, the plugin uses the OS timezone. It does not use  Home Assistants time entity (for performace reasons, offline behaviour). Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
 
 i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
