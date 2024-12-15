@@ -1,9 +1,10 @@
 import { DateTime } from "./luxon.min.js";
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
-		this.createTime(hass)
+        this.hass_obj = hass;
+		this.createTime()
 	}
-	createTime(hass) {
+	createTime() {
 		if (!this.content) {
 			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + ';"' : ""}></div>${this.config.parentHTML ? '' + this.config.parentHTML + '' : ""}</ha-card>`;
 			this.content = this.querySelector("div");
@@ -16,15 +17,15 @@ class BetterMomentCard extends HTMLElement {
 					this.content.appendChild(elm[k]);
 				});
 				let dtMatrix = (f = "HH:mm:ss", tz, loc, locs) => {
-					locs = (typeof locs === 'string') ? (JSON.parse(locs) || 0) : locs;
 					let dt = DateTime.now();
+					locs = (typeof locs === 'string') ? (JSON.parse(locs) || false) : locs;
 					if (tz) {
 						if (tz.startsWith("useEntity")) {
 							const match = tz.match(/useEntity\[(.*?)\]/)?.[1].split('.');
-							const entity = hass.states[`${match[0]}.${match[1]}`];
+							let entity = this.hass_obj.states[`${match[0]}.${match[1]}`];
 							tz = entity ? match.slice(2).reduce((acc, key) => acc?.[key], entity) : tz;
 						}
-						dt = dt.setZone(tz === "useHass" ? hass.config.time_zone : tz);
+						dt = dt.setZone(tz === "useHass" ? this.hass_obj.config.time_zone : tz);
 					}
 					if (loc) dt = dt.setLocale(loc);
 					return locs ? dt.toLocaleString(locs) : dt.toFormat(f);
