@@ -7,6 +7,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 [<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
 </p>
 
+
 **Features:**
 - Infinitely customizable
 - Custom fonts
@@ -54,10 +55,12 @@ moment:
 
 #### Style 3
 
-<div style="width: 60%; height: 50%">
-  
-  ![](docs/image-1.png)
-</div>
+<p align="center" style="width: 60%; height: 50%">
+
+[<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
+</p>
+
+The background animations in this preview use "lovelace-bg-animation" https://github.com/ibz0q/lovelace-bg-animation
 
 
 ```Yaml
@@ -130,7 +133,7 @@ parentStyle: > # CSS applied to root card container (See DOM Tree)
 interval: 1000 # In milliseconds: how often DOM is written to (defaults to 1000 - every second)
 moment:
   - format: yyyy # Date format (table below)
-    timezone: Europe/Brussels # Uses IANA format or "useHass" to use Home Assistants user timezone.
+    timezone: Europe/Brussels # Uses IANA format | "useHass" # Use Home Assistant Global TZ | "useEntity[input_select.timezone] # Use an entity.
     locale: ar # See Luxon.js API docs for all languages
     localeSetting: # See Luxon.js API docs
         year: "numeric"
@@ -214,9 +217,21 @@ moment:
 
 ### Timezones
 
-By default, the plugin uses the OS timezone. It does not use  Home Assistants time entity (for performace reasons, offline behaviour). Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
+By default, the plugin uses the timezone on the device viewed on. It does not use  Home Assistants time entity (for performace reasons, offline behaviour). Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
 
 i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
+
+You can use Home Assistants timezone using:
+
+i.e. `timezone: useHass` or `{{moment timezone=useHass}}`
+
+Or you can use an entity as a Timezone. The entity must be in the IANA standard, there is no conversion performed.  
+
+i.e. `timezone: useEntity[input_select.timezone.state]` or `{{moment timezone=useEntity[input_select.timezone.state]}}`
+
+OR
+
+i.e. `timezone: useEntity[input_select.timezone.attribute.someattr]` or `{{moment timezone=useEntity[input_select.attribute.someattr]}}`
 
 
 ### Internationalization / Locales
