@@ -133,7 +133,7 @@ parentStyle: > # CSS applied to root card container (See DOM Tree)
 interval: 1000 # In milliseconds: how often DOM is written to (defaults to 1000 - every second)
 moment:
   - format: yyyy # Date format (table below)
-    timezone: Europe/Brussels # Uses IANA format | "useHass" # Use Home Assistant Global TZ | "useEntity[input_select.timezone] # Use an entity.
+    timezone: Europe/Brussels # Uses IANA format | "useHass" # Use Home Assistant Global TZ | "useEntity[input_select.timezone.state] # Use an entity.
     locale: ar # See Luxon.js API docs for all languages
     localeSetting: # See Luxon.js API docs
         year: "numeric"
@@ -214,6 +214,26 @@ moment:
     parentStyle: |   **
       font-size:4.4em;
 ```
+### Sections layout
+
+As this card allows limitless options and heights. Sections assumes cards are a fixed height. The card size (required) is 2. You may wish to override this.
+
+If you are facing issues with Sections or layout in general, try using layout_options or grid_options to adjust to your desired card size.
+
+```YAML
+type: custom:better-moment-card
+layout_options:
+  grid_rows: 3
+  grid_max_rows: 3
+  grid_min_rows: 3
+grid_options:
+  columns: full
+  rows: 3
+moment:
+  - format: HH:mm:ss
+```
+
+AFAIK there is no dynamic option available to me as a dev so this may be required in certain circumstances.
 
 ### Timezones
 
@@ -221,11 +241,11 @@ By default, the plugin uses the timezone on the device viewed on. It does not us
 
 i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
-You can use Home Assistants timezone using:
+Use Home Assistants timezone:
 
 i.e. `timezone: useHass` or `{{moment timezone=useHass}}`
 
-Or you can use an entity as a Timezone. The entity must be in the IANA standard, there is no conversion performed.  
+Use an entity as a Timezone. The entity must be in the IANA standard, there is no conversion performed.  
 
 i.e. `timezone: useEntity[input_select.timezone.state]` or `{{moment timezone=useEntity[input_select.timezone.state]}}`
 
