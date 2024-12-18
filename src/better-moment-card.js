@@ -1,7 +1,7 @@
 import { DateTime } from "./luxon.min.js";
 class BetterMomentCard extends HTMLElement {
 	set hass(hass) {
-        this.hass_obj = hass;
+		this.hass_obj = hass;
 		this.createTime()
 	}
 	createTime() {
@@ -21,7 +21,7 @@ class BetterMomentCard extends HTMLElement {
 					locs = (typeof locs === 'string') ? (JSON.parse(locs) || false) : locs;
 					if (tz) {
 						if (tz.startsWith("useEntity")) {
-							const match = tz.match(/useEntity\[(.*?)\]/)?.[1].split('.');
+							let match = tz.match(/useEntity\[(.*?)\]/)?.[1].split('.');
 							let entity = this.hass_obj.states[`${match[0]}.${match[1]}`];
 							tz = entity ? match.slice(2).reduce((acc, key) => acc?.[key], entity) : tz;
 						}
