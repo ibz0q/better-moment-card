@@ -32,11 +32,12 @@ class BetterMomentCard extends HTMLElement {
 				};
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
+						let html;
 						if (config.moment[k].templateRaw) {
-							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (dtMatrix(f, tz || false, loc || false, locs)));
+							html = (config.moment[k].templateRaw).replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (dtMatrix(f, tz || false, loc || false, locs)));
 						} else {
 							let dt = dtMatrix(config.moment[k].format, config.moment[k].timezone || false, config.moment[k].locale || false, config.moment[k].localeString || false);
-							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, dt) : dt
+							html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, dt) : dt
 						}
 						elm[k].innerHTML = html
 					})
