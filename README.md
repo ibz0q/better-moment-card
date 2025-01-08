@@ -159,6 +159,9 @@ moment:
       Berlin is offset <strong> {{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> 
       # Ouput: Berlin is offset +0100 from UTC
 
+      {{moment format=dd MMMM}} - {{sensor entity_id=sensor.livingroom_temperature}}°C
+      # Ouput: 08 January - 20.1°C
+
 ```
 ## Install with HACS
 
