@@ -34,6 +34,7 @@ class BetterMomentCard extends HTMLElement {
 					Object.keys(config.moment).forEach(k => {
 						if (config.moment[k].templateRaw) {
 							var html = config.moment[k].templateRaw.replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (dtMatrix(f, tz || false, loc || false, locs)));
+							html = html.replace(/{{sensor\s+entity_id=(.*?)}}/g, (match, entityId) => {let stateObj = this.hass_obj.states[entityId.trim()]; return stateObj ? stateObj.state : "N/A";});
 						} else {
 							let dt = dtMatrix(config.moment[k].format, config.moment[k].timezone || false, config.moment[k].locale || false, config.moment[k].localeString || false);
 							var html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, dt) : dt
