@@ -35,16 +35,12 @@ class BetterMomentCard extends HTMLElement {
 						let html, template = config.moment[k].templateRaw || config.moment[k].template || false;
 						if (template && typeof template === 'string' && (config.moment[k].helper || config.helper)) {
 							template = template.replace(/\[\[(\w+)(?:\((.*?)\))?\]\]/g, (m, h, p) => {
-								if (config.moment[k].helper?.[h] || config.helper?.[h]) {
-									try {
-										let innerFunction = new Function('DateTime', 'hass', 'config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]));
-										return innerFunction(DateTime, this.hass_obj, config, p);
-									} catch (error) {
-										console.error(`Error executing helper function ${h}:`, error);
-										return 'N/A';
-									}
+								try {
+									return (config.moment[k].helper?.[h] || config.helper?.[h]) ? new Function('DateTime', 'hass', 'config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]))(DateTime, this.hass_obj, config, p) : 'N/A';
+								} catch (error) {
+									console.error(`Error executing helper function ${h}:`, error);
+									return 'N/A';
 								}
-								return 'N/A';
 							});
 						}
 						if (config.moment[k].templateRaw) {
