@@ -32,12 +32,22 @@ class BetterMomentCard extends HTMLElement {
 				};
 				let updateDom = () => {
 					Object.keys(config.moment).forEach(k => {
-						let html;
+						let html, template = config.moment[k].templateRaw || config.moment[k].template || false;
+						if (template && typeof template === 'string' && (config.moment[k].helper || config.helper)) {
+							template = template.replace(/\[\[(\w+)(?:\((.*?)\))?\]\]/g, (m, h, p) => {
+								try {
+									return (config.moment[k].helper?.[h] || config.helper?.[h]) ? new Function('DateTime', 'hass', 'config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]))(DateTime, this.hass_obj, config, p) : 'N/A';
+								} catch (error) {
+									console.error(`Error executing helper function ${h}:`, error);
+									return 'N/A';
+								}
+							});
+						}
 						if (config.moment[k].templateRaw) {
-							html = (config.moment[k].templateRaw).replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (dtMatrix(f, tz || false, loc || false, locs)));
+							html = (template).replace(/{{moment\s+format=(.*?)\s*(?:timezone=(.*?))?\s*(?:locale=(.*?))?\s*(?:localeSetting=(.*?))?}}/g, (m, f, tz, loc, locs) => (dtMatrix(f, tz || false, loc || false, locs)));
 						} else {
 							let dt = dtMatrix(config.moment[k].format, config.moment[k].timezone || false, config.moment[k].locale || false, config.moment[k].localeString || false);
-							html = config.moment[k].template ? (config.moment[k].template).replace(/{{moment}}/g, dt) : dt
+							html = config.moment[k].template ? (template).replace(/{{moment}}/g, dt) : dt
 						}
 						elm[k].innerHTML = html
 					})
