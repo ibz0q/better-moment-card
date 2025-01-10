@@ -14,7 +14,6 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 - Timezone and Locale support
 - Sample styles provided
 
-
 ## Documentation - Table of Contents
   - [Example styles](#example-styles)
   - [Installation](#installation)
@@ -260,13 +259,16 @@ type: custom:better-moment-card
 moment:
    - helper: 
       someTempSensor: |
-          var somestring = "Temp is";
-          console.log(param;
+          var somestring = "Temp is ";
+          console.log(param);
           return somestring + hass.states["binary_sensor.door_sensor_contact"].attribute.temprature
 
      templateRaw: |
         {{moment format=HH:mm }}
         Data from my temp sensor: [[someTempSensor(hi)]]
+      # Date from my temp sensor: Temp is 5
+      # Console log output is "hi" 
+
 ```
 
 APIs available: 
