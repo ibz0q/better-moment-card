@@ -254,7 +254,7 @@ When using `localeSetting` inside a `template` or `templateRaw`, it expects a pr
 
 ## Helper functions
 
-You can execute full JS using helper functions, the intended function is to give you access to Home Assistant states allowing powerful customization.
+You can execute full JS using helper functions, this is intended to give users access to Home Assistant states allowing powerful customization.
 
 ```YAML
 type: custom:better-moment-card
@@ -278,7 +278,6 @@ APIs available:
 | hass     | Home Assistant JS Object |
 | config   | Full Moment Config Object            |
 | param    | Parameter passed through via helperName(thisparam) i.e.  thisparam                      |
-|          |                          |
 
 ## Layouts (Sections)
 
