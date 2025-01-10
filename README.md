@@ -20,24 +20,23 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 - [Better Moment Card](#better-moment-card)
     - [Features:](#features)
     - [Table of Contents](#table-of-contents)
-    - [Examples Styles](#examples-styles)
+    - [Examples](#examples)
       - [Style 1](#style-1)
       - [Style 2](#style-2)
       - [Style 3](#style-3)
-    - [Minimal options](#minimal-options)
+  - [HACS installation](#hacs-installation)
+  - [Manual installation](#manual-installation)
     - [All available options](#all-available-options)
-  - [Install with HACS](#install-with-hacs)
-  - [Manual Install](#manual-install)
   - [DOM Tree](#dom-tree)
-  - [Layouts (Sections)](#layouts-sections)
   - [Timezones](#timezones)
   - [Internationalization / Locales](#internationalization--locales)
+  - [Helper functions](#helper-functions)
+  - [Layouts (Sections)](#layouts-sections)
   - [Date/Time Formats](#datetime-formats)
   - [Feature requests](#feature-requests)
-  - [DISCLAIMER](#disclaimer)
+  - [Disclaimer](#disclaimer)
 
-
-### Examples Styles
+### Examples
 
 #### Style 1
 
@@ -130,21 +129,23 @@ moment:
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
 
-### Minimal options
+## HACS installation
+
+Search "Better Moment Card" in HACs and Download.
+
+## Manual installation
+
+Download the release file then create a folder "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, reference it accordingly inside Lovelace custom resources tab in the Dashboard.
 
 ```Yaml
-type: custom:better-moment-card
-moment:
-  - format: HH:mm:ss
+resource:
+  - url: /local/better-moment-card/better-moment-card.js
+    type: js
 ```
 
-This will have no default styling applied to it so it may look bare. This is intentional, so users can customize how they want without using messy CSS !overrides.
+Refresh your browser.
 
-1. Either apply styling using the parentStyle
-
-2. Use example style above to help you.
-
-### All available options
+### All available options 
 
 ```Yaml
 type: custom:better-moment-card
@@ -186,21 +187,6 @@ moment:
       exampleHelper: |
         return 1+2; # 3
 ```
-## Install with HACS
-
-Search "Better Moment Card" in HACs and click Download.
-
-## Manual Install
-
-Download the release file then create a folder "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, then reference it accordingly inside Lovelace custom resources tab in the Dashboard.
-
-```Yaml
-resource:
-  - url: /local/better-moment-card/better-moment-card.js
-    type: js
-```
-
-Refresh your browser and the plugin will load.
 
 ## DOM Tree
 
@@ -241,26 +227,6 @@ moment:
     parentStyle: |   **
       font-size:4.4em;
 ```
-## Layouts (Sections)
-
-The Sections layout assumes cards are a fixed height but your layout may change the assumption and you may wish to override this.
-
-If you are facing issues with Sections or layout in general, try using layout_options or grid_options to adjust to your desired card size.
-
-```YAML
-type: custom:better-moment-card
-layout_options:
-  grid_rows: 3
-  grid_max_rows: 3
-  grid_min_rows: 3
-grid_options:
-  columns: full
-  rows: 3
-moment:
-  - format: HH:mm:ss
-```
-
-AFAIK there is no dynamic option available to me as a dev so this may be required in certain circumstances.
 
 ## Timezones
 
@@ -332,6 +298,57 @@ moment:
 ```
 
 When using `localeSetting` inside a `template` or `templateRaw`, it expects a properly formatted JSON string, if you face issues please check using an online linter and ensure you are passing in a valid JSON string.
+
+## Helper functions
+
+You're able execute full JS using helper functions, the intended function is to give you access to Home Assistant states allowing powerful customization.
+
+```YAML
+type: custom:better-moment-card
+moment:
+   - helper: 
+      someTempSensor: |
+          var somestring = "Temp is";
+          console.log(param;
+          return somestring + hass.states["binary_sensor.door_sensor_contact"].attribute.temprature
+
+     templateRaw: |
+        {{moment format=HH:mm }}
+        Data from my temp sensor: [[someTempSensor(hi)]]
+```
+
+APIs available: 
+
+| Name     | Object                   |
+|----------|--------------------------|
+| DateTime | Luxon.js instance        |
+| hass     | Home Assistant JS Object |
+| config   | Full Moment Config Object            |
+| param    | Parameter passed through via helperName(thisparam) i.e.  thisparam                      |
+|          |                          |
+
+## Layouts (Sections)
+
+The Sections layout assumes cards are a fixed height but your layout may change the assumption and you may wish to override this.
+
+If you are facing issues with Sections or layout in general, try using layout_options or grid_options to adjust to your desired card size.
+
+```YAML
+type: custom:better-moment-card
+layout_options:
+  grid_rows: 3
+  grid_max_rows: 3
+  grid_min_rows: 3
+grid_options:
+  columns: full
+  rows: 3
+moment:
+  - format: HH:mm:ss
+```
+
+AFAIK there is no dynamic option available to me as a dev so this may be required in certain circumstances.
+
+
 
 ## Date/Time Formats
 
@@ -416,7 +433,6 @@ These go inside ` - format: ` or `{{moment format=HH:mm}}`
 
 Requests for features can be submitted through an issue.
 
-
-## DISCLAIMER
+## Disclaimer
 
 Wrote this for personal use but decided to release it, no warranty.
