@@ -254,7 +254,7 @@ When using `localeSetting` inside a `template` or `templateRaw`, it expects a pr
 
 ## Helper functions
 
-You're able execute full JS using helper functions, the intended function is to give you access to Home Assistant states allowing powerful customization.
+You can execute full JS using helper functions, the intended function is to give you access to Home Assistant states allowing powerful customization.
 
 ```YAML
 type: custom:better-moment-card
