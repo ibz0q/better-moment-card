@@ -228,8 +228,9 @@ Result:
 
 ![alt text](docs/locales.png)
 
-Refer to [Luxon.js toLocaleString](https://moment.github.io/luxon/api-docs/index.html#datetimetolocalestring)
+#### Granualar control
 
+You can use localeSetting to pass in "toLocaleString", refer to [Luxon.js toLocaleString](https://moment.github.io/luxon/api-docs/index.html#datetimetolocalestring)
 
 Example:
 
