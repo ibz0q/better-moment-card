@@ -16,12 +16,11 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 
 
 #### Table of Contents
-  - [Examples](#example-styles)
-  - [HACS installation](#hacs-installation)
-  - [Manual installation](#manual-installation)
+  - [Example styles](#example-styles)
+  - [Installation](#installation)
   - [All available options](#all-available-options)
   - [Timezones](#timezones)
-  - [Internationalization / Locales](#internationalization--locales)
+  - [Internationalization / Locales](#internationalization-(locales))
   - [Helper functions](#helper-functions)
   - [Layouts (Sections)](#layouts-sections)
   - [Date/Time Formats](#datetime-formats)
@@ -120,11 +119,11 @@ moment:
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
 
-## HACS installation
+## Installation
 
 Search "Better Moment Card" in HACs and Download.
 
-## Manual installation
+### Manual installation
 
 Download the release file then create a folder "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, reference it accordingly inside Lovelace custom resources tab in the Dashboard.
 
@@ -204,7 +203,7 @@ moment:
       {{moment timezone=useEntity[input_select.attribute.someattr]}}
 ```
 
-## Internationalization / Locales
+## Internationalization (Locales)
 
 To use a specific locale defined it like so:
 
