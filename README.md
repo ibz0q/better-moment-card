@@ -15,7 +15,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 - Sample styles provided
 
 
-### Documentation - Table of Contents
+## Documentation - Table of Contents
   - [Example styles](#example-styles)
   - [Installation](#installation)
   - [All available options](#all-available-options)
