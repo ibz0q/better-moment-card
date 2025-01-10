@@ -20,7 +20,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
   - [Installation](#installation)
   - [All available options](#all-available-options)
   - [Timezones](#timezones)
-  - [Internationalization / Locales](#internationalization-(locales))
+  - [Internationalization (Locales)](#internationalization-locales)
   - [Helper functions](#helper-functions)
   - [Layouts (Sections)](#layouts-sections)
   - [Date/Time Formats](#datetime-formats)
