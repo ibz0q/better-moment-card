@@ -228,7 +228,8 @@ Result:
 
 ![alt text](docs/locales.png)
 
-For granular control is possible, it requires you to read the Luxon.js documentation around Intl.
+Refer to [Luxon.js toLocaleString](https://moment.github.io/luxon/api-docs/index.html#datetimetolocalestring)
+
 
 Example:
 
