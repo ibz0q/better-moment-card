@@ -15,3 +15,5 @@ assignees: ''
 A clear and concise description of what you expected to happen.
 
 **Which browser are you using? Chrome, Firefox, Fully Kiosk Browser (Include webview version) etc
+
+## Bug reports that do not provide this information will be closed 
