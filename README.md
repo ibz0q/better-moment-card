@@ -10,7 +10,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 ## Features:
 - Infinitely customizable
 - Custom fonts
-- HTML/CSS Templating (Multiple Time + Sensors support)
+- HTML/CSS Templating (Multiple Time + States support)
 - Timezone and Locale support
 - Sample styles provided
 
