@@ -16,25 +16,16 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 
 
 ### Table of Contents
-
-- [Better Moment Card](#better-moment-card)
-    - [Features:](#features)
-    - [Table of Contents](#table-of-contents)
-    - [Examples](#examples)
-      - [Style 1](#style-1)
-      - [Style 2](#style-2)
-      - [Style 3](#style-3)
+  - [Examples](#examples)
   - [HACS installation](#hacs-installation)
   - [Manual installation](#manual-installation)
-    - [All available options](#all-available-options)
-  - [DOM Tree](#dom-tree)
+  - [All available options](#all-available-options)
   - [Timezones](#timezones)
   - [Internationalization / Locales](#internationalization--locales)
   - [Helper functions](#helper-functions)
   - [Layouts (Sections)](#layouts-sections)
   - [Date/Time Formats](#datetime-formats)
-  - [Feature requests](#feature-requests)
-  - [Disclaimer](#disclaimer)
+  - [DOM Structure](#dom-structure)
 
 ### Examples
 
@@ -145,7 +136,7 @@ resource:
 
 Refresh your browser.
 
-### All available options 
+## All available options 
 
 ```Yaml
 type: custom:better-moment-card
@@ -186,46 +177,6 @@ moment:
     helper: 
       exampleHelper: |
         return 1+2; # 3
-```
-
-## DOM Tree
-
-The `parentStyle` applies styling to the parent or instance div container. 
-
-Each instance (moment) gets it's own ID too (moment-0, moment-1 etc), useful if you're also using card-mod (optional).
-
-```
-+-------------------------+
-|    HA-card              |
-|                         |
-|  +----------------------+
-|  | card-content         |
-|  | (parentStyle *)      |
-|  |  +-------------------+
-|  |  | moment-0          |
-|  |  | (parentStyle **)  |
-|  |  +-------------------+
-|  |  | moment-1          |
-|  |  | (parentStyle **)  |
-|  |  +-------------------+
-|  +----------------------+
-+-------------------------+
-```
-
-YAML Illustration (see asterix *)
-
-```YAML
-type: custom:better-moment-card
-parentStyle: |       *
-  line-height:normal;
-    'date date brussells'; 
-moment:
-  - format: HH:mm:ss
-    parentStyle: |   **
-      font-size:4.4em;
-  - format: HH:mm:ss
-    parentStyle: |   **
-      font-size:4.4em;
 ```
 
 ## Timezones
@@ -428,6 +379,47 @@ These go inside ` - format: ` or `{{moment format=HH:mm}}`
 | FFFF             |              | extra verbose localized date and time with seconds             | `Wednesday, August 6, 2014, 1:07:04 PM Eastern Daylight Time` |
 | X                |              | unix timestamp in seconds                                      | `1407287224`                                                  |
 | x                |              | unix timestamp in milliseconds                                 | `1407287224054`                                               |
+
+
+## DOM structure
+
+The `parentStyle` applies styling to the parent or instance div container. 
+
+Each instance (moment) gets it's own ID too (moment-0, moment-1 etc), useful if you're also using card-mod (optional).
+
+```
++-------------------------+
+|    HA-card              |
+|                         |
+|  +----------------------+
+|  | card-content         |
+|  | (parentStyle *)      |
+|  |  +-------------------+
+|  |  | moment-0          |
+|  |  | (parentStyle **)  |
+|  |  +-------------------+
+|  |  | moment-1          |
+|  |  | (parentStyle **)  |
+|  |  +-------------------+
+|  +----------------------+
++-------------------------+
+```
+
+YAML Illustration (see asterix *)
+
+```YAML
+type: custom:better-moment-card
+parentStyle: |       *
+  line-height:normal;
+    'date date brussells'; 
+moment:
+  - format: HH:mm:ss
+    parentStyle: |   **
+      font-size:4.4em;
+  - format: HH:mm:ss
+    parentStyle: |   **
+      font-size:4.4em;
+```
 
 ## Feature requests
 
