@@ -7,7 +7,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 [<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
 </p>
 
-### Features:
+## Features:
 - Infinitely customizable
 - Custom fonts
 - HTML/CSS Templating (Multiple Time + Sensors support)
@@ -15,8 +15,8 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 - Sample styles provided
 
 
-### Table of Contents
-  - [Examples](#examples)
+#### Table of Contents
+  - [Examples](#example-styles)
   - [HACS installation](#hacs-installation)
   - [Manual installation](#manual-installation)
   - [All available options](#all-available-options)
@@ -27,7 +27,7 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
   - [Date/Time Formats](#datetime-formats)
   - [DOM Structure](#dom-structure)
 
-### Examples
+### Example styles
 
 #### Style 1
 
@@ -299,8 +299,6 @@ moment:
 ```
 
 AFAIK there is no dynamic option available to me as a dev so this may be required in certain circumstances.
-
-
 
 ## Date/Time Formats
 
