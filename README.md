@@ -7,15 +7,26 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 [<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
 </p>
 
-
-**Features:**
+## Features:
 - Infinitely customizable
 - Custom fonts
-- HTML/CSS templating
+- HTML/CSS Templating (Multiple Time + States support)
 - Timezone and Locale support
 - Sample styles provided
 
-### Examples Styles
+
+## Documentation - Table of Contents
+  - [Example styles](#example-styles)
+  - [Installation](#installation)
+  - [All available options](#all-available-options)
+  - [Timezones](#timezones)
+  - [Internationalization (Locales)](#internationalization-locales)
+  - [Helper functions](#helper-functions)
+  - [Layouts (Sections)](#layouts-sections)
+  - [Date/Time Formats](#datetime-formats)
+  - [DOM Structure](#dom-structure)
+
+### Example styles
 
 #### Style 1
 
@@ -31,7 +42,7 @@ moment:
   - format: HH:mm:ss
     parentStyle: font-size:3em; text-align:center; padding:0 0 1em 0
   - format: cccc, dd MMMM yy
-    parentStyle: font-size:2em; text-align:center;```
+    parentStyle: font-size:2em; text-align:center;
 ```
 
 #### Style 2
@@ -52,7 +63,6 @@ moment:
     parentStyle: font-size:1.6em; text-align:center;
 ```
 
-
 #### Style 3
 
 <p align="center" style="width: 60%; height: 50%">
@@ -61,7 +71,6 @@ moment:
 </p>
 
 The background animations in this preview use "lovelace-bg-animation" https://github.com/ibz0q/lovelace-bg-animation
-
 
 ```Yaml
 type: custom:better-moment-card
@@ -110,20 +119,23 @@ moment:
       <div style="font-size:1.2em;">{{moment}}</div>
 ```
 
-### Minimum options
+## Installation
+
+Search "Better Moment Card" in HACs and Download.
+
+### Manual installation
+
+Download the release file then create a folder "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, reference it accordingly inside Lovelace custom resources tab in the Dashboard.
+
 ```Yaml
-type: custom:better-moment-card
-moment:
-  - format: HH:mm:ss
+resource:
+  - url: /local/better-moment-card/better-moment-card.js
+    type: js
 ```
 
-This will have no default styling applied to it so it may look bare. This is intentional, so users can customize how they want without using messy CSS !overrides.
+Refresh your browser.
 
-1. Either apply styling using the parentStyle
-
-2. Use example style above to help you.
-
-### All parameters:
+## All available options 
 
 ```Yaml
 type: custom:better-moment-card
@@ -131,6 +143,9 @@ parentStyle: > # CSS applied to root card container (See DOM Tree)
   font-family: Avant Garde,Avantgarde,Century
   Gothic,CenturyGothic,AppleGothic,sans-serif; 
 interval: 1000 # In milliseconds: how often DOM is written to (defaults to 1000 - every second)
+helper: 
+  exampleHelper: |
+    return 1+1; # 2
 moment:
   - format: yyyy # Date format (table below)
     timezone: Europe/Brussels # Uses IANA format | "useHass" # Use Home Assistant Global TZ | "useEntity[input_select.timezone.state] # Use an entity.
@@ -144,79 +159,128 @@ moment:
         timeZoneName: "short"
     parentStyle: font-size:2em; text-align:center; # CSS for indivdual instance - See DOM Tree
     template: | 
-      It's <strong> {{moment}} </strong> 
-    # Output: It's *2024*
+      It's <strong> {{moment}} </strong> # It's *2024*
   
-  - templateRaw: | # If specified, format, timezone, locale, localeSettings are ignored and can be passed inside {{moment format=* timezone=*}}, each array containing templateRaw multiple moments can be supplied.  
-      It's currently <strong> {{moment format=HH:mm}} </strong> 
-      # Output: It's currently 09:40 (Uses local timezone)
+  - templateRaw: | # If specified, format, timezone, locale, localeSettings are ignored and can be passed inside {{moment format=* timezone=*}}
+      It's currently <strong> {{moment format=HH:mm}} </strong> # It's currently 09:40 (Uses local timezone)
       
       It's <strong> {{moment format=HH:mm:ss timezone=Europe/Berlin}} in Berlin</strong> 
-      # Overrides to Europe/Berlin timezone
+      # Sets timezone to Europe/Berlin
 
       This is what the time looks like in <strong> {{moment format=HH:mm:ss locale=ar}} in Arabic</strong> 
 
-      Berlin is offset <strong> {{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> 
-      # Ouput: Berlin is offset +0100 from UTC
-
-```
-## Install with HACS
-
-Search "Better Moment Card" in HACs and click Download.
-
-## Manual Install
-
-Download the release file then create a folder "better-moment-card" in the www folder inside your Home Assistant install directory. Add the contents of the release zip so the files sits directly inside the folder you created i.e. better-moment-card/better-moment-card.js ... etc, then reference it accordingly inside Lovelace custom resources tab in the Dashboard.
-
-```yaml
-resource:
-  - url: /local/better-moment-card/better-moment-card.js
-    type: js
+      Berlin is offset <strong> {{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> # Berlin is offset +0100 from UTC
+      
+      Output from my helper is [[exampleHelper]] # 3
+      
+    helper: 
+      exampleHelper: |
+        return 1+2; # 3
 ```
 
-Refresh your browser and the plugin will load.
+## Timezones
 
-### DOM Tree
+The plugin uses the timezone on the device viewed on. It does not use  Home Assistants time entity (for performace reasons, offline behaviour). Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
 
-The `parentStyle` applies styling to the parent or instance div container. 
+i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
-Each instance (moment) gets it's own ID too (moment-0, moment-1 etc), useful if you're also using card-mod (optional).
+Use Home Assistants timezone:
 
-```
-+-------------------------+
-|    HA-card              |
-|                         |
-|  +----------------------+
-|  | card-content         |
-|  | (parentStyle *)      |
-|  |  +-------------------+
-|  |  | moment-0          |
-|  |  | (parentStyle **)  |
-|  |  +-------------------+
-|  |  | moment-1          |
-|  |  | (parentStyle **)  |
-|  |  +-------------------+
-|  +----------------------+
-+-------------------------+
-```
+i.e. `timezone: useHass` or `{{moment timezone=useHass}}`
 
-YAML Illustration (see asterix *)
-```
+You can also use a sensors value as a Timezone. 
+
+All examples:
+
+```YAML
 type: custom:better-moment-card
-parentStyle: |       *
-  line-height:normal;
-    'date date brussells'; 
 moment:
-  - format: HH:mm:ss
-    parentStyle: |   **
-      font-size:4.4em;
-  - format: HH:mm:ss
-    parentStyle: |   **
-      font-size:4.4em;
+  - format: tttt
+    timezone:  useEntity[input_select.timezone.attribute.someattr] # Uses a TZ from a sensor (Value must be a valid IANA TZ)
+  - format: tttt
+    timezone: useHass # Uses Home Assistants TZ
+  - templateRaw: |
+      {{moment timezone=useEntity[input_select.attribute.someattr]}}
 ```
-### Sections layout
 
-As this card allows limitless options and heights. Sections assumes cards are a fixed height. The card size (required) is 2. You may wish to override this.
+## Internationalization (Locales)
+
+To use a specific locale defined it like so:
+
+i.e. `locale: ar` or `{{moment locale=ar}}`
+
+Example:
+
+```YAML
+type: custom:better-moment-card
+moment:
+  - format: tttt
+    locale: fr
+  - format: tttt
+    locale: ar
+  - format: tttt
+    locale: ca
+  - templateRaw: |
+      {{moment format=tttt locale=chi}}
+```
+Result:
+
+![alt text](docs/locales.png)
+
+#### Granualar control
+
+You can use localeSetting to pass in "toLocaleString", refer to [Luxon.js toLocaleString](https://moment.github.io/luxon/api-docs/index.html#datetimetolocalestring)
+
+Example:
+
+```YAML
+type: custom:better-moment-card
+moment:
+  - format: tttt
+    locale: ar
+    localeSetting: 
+      year: numeric
+      month: long
+      day: numeric 
+      hour: numeric 
+      minute: 2-digit
+      timeZoneName: short
+  - templateRaw: |
+      {{moment locale=ar localeSetting={"year": "numeric","month": "long","day": "numeric","hour":"numeric","minute": "2-digit","timeZoneName": "short"} }}
+```
+
+When using `localeSetting` inside a `template` or `templateRaw`, it expects a properly formatted JSON string, if you face issues please check using an online linter and ensure you are passing in a valid JSON string.
+
+## Helper functions
+
+You can execute full JS using helper functions, this is intended to give users access to Home Assistant states allowing powerful customization.
+
+```YAML
+type: custom:better-moment-card
+moment:
+   - helper: 
+      someTempSensor: |
+          var somestring = "Temp is";
+          console.log(param;
+          return somestring + hass.states["binary_sensor.door_sensor_contact"].attribute.temprature
+
+     templateRaw: |
+        {{moment format=HH:mm }}
+        Data from my temp sensor: [[someTempSensor(hi)]]
+```
+
+APIs available: 
+
+| Name     | Object                   |
+|----------|--------------------------|
+| DateTime | Luxon.js instance        |
+| hass     | Home Assistant JS Object |
+| config   | Full Moment Config Object            |
+| param    | Parameter passed through via helperName(thisparam) i.e.  thisparam                      |
+
+## Layouts (Sections)
+
+The Sections layout assumes cards are a fixed height but your layout may change the assumption and you may wish to override this.
 
 If you are facing issues with Sections or layout in general, try using layout_options or grid_options to adjust to your desired card size.
 
@@ -235,40 +299,7 @@ moment:
 
 AFAIK there is no dynamic option available to me as a dev so this may be required in certain circumstances.
 
-### Timezones
-
-By default, the plugin uses the timezone on the device viewed on. It does not use  Home Assistants time entity (for performace reasons, offline behaviour). Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
-
-i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
-
-Use Home Assistants timezone:
-
-i.e. `timezone: useHass` or `{{moment timezone=useHass}}`
-
-Use an entity as a Timezone. The entity must be in the IANA standard, there is no conversion performed.  
-
-i.e. `timezone: useEntity[input_select.timezone.state]` or `{{moment timezone=useEntity[input_select.timezone.state]}}`
-
-OR
-
-i.e. `timezone: useEntity[input_select.timezone.attribute.someattr]` or `{{moment timezone=useEntity[input_select.attribute.someattr]}}`
-
-
-### Internationalization / Locales
-
-This feature uses Intl API built into modern browsers and there's many advantages to this but one side effect is this API may not be available on all browsers (see support here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). You can use this features by specifying a locale:
-
-i.e. `locale: ar` or `{{moment locale=ar}}`
-
-There's granular locale features such as toLocaleString which allows specifying smaller details. If you wish to use this feature, it requires you to read the Luxon.js documentation around Intl.
-
-Example:
-
-i.e. `localeSetting: .... year: numeric.... (Full ref above)` or `{{moment locale=ar localeSetting={"year": "numeric","month": "long","day": "numeric","hour":"numeric","minute": "2-digit","timeZoneName": "short"} }}`
-
-When using `localeSetting` inside a template, it expects a properly formatted JSON string, if you face issues please check using an online linter and ensure you are passing in a valid JSON string.
-
-### Date/Time Formats
+## Date/Time Formats
 
 These go inside ` - format: ` or `{{moment format=HH:mm}}`
 
@@ -347,11 +378,51 @@ These go inside ` - format: ` or `{{moment format=HH:mm}}`
 | X                |              | unix timestamp in seconds                                      | `1407287224`                                                  |
 | x                |              | unix timestamp in milliseconds                                 | `1407287224054`                                               |
 
+
+## DOM structure
+
+The `parentStyle` applies styling to the parent or instance div container. 
+
+Each instance (moment) gets it's own ID too (moment-0, moment-1 etc), useful if you're also using card-mod (optional).
+
+```
++-------------------------+
+|    HA-card              |
+|                         |
+|  +----------------------+
+|  | card-content         |
+|  | (parentStyle *)      |
+|  |  +-------------------+
+|  |  | moment-0          |
+|  |  | (parentStyle **)  |
+|  |  +-------------------+
+|  |  | moment-1          |
+|  |  | (parentStyle **)  |
+|  |  +-------------------+
+|  +----------------------+
++-------------------------+
+```
+
+YAML Illustration (see asterix *)
+
+```YAML
+type: custom:better-moment-card
+parentStyle: |       *
+  line-height:normal;
+    'date date brussells'; 
+moment:
+  - format: HH:mm:ss
+    parentStyle: |   **
+      font-size:4.4em;
+  - format: HH:mm:ss
+    parentStyle: |   **
+      font-size:4.4em;
+```
+
 ## Feature requests
 
 Requests for features can be submitted through an issue.
 
-
-## DISCLAIMER
+## Disclaimer
 
 Wrote this for personal use but decided to release it, no warranty.
