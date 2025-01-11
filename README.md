@@ -15,7 +15,6 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 - Timezone and Locale support
 - Sample styles provided
 <br/>
-<br/>
 
 ## Documentation - Table of Contents
   - [Example styles](#example-styles)
@@ -169,7 +168,7 @@ moment:
       It's <strong> {{moment format=HH:mm:ss timezone=Europe/Berlin}} in Berlin</strong> 
       # Sets timezone to Europe/Berlin
 
-      This is what the time looks like in <strong> {{moment format=HH:mm:ss locale=ar}} in Arabic</strong> 
+      This is what the date looks like in <strong> {{moment format=tttt locale=ar}} in Arabic</strong> 
 
       Berlin is offset <strong> {{moment format=ZZ timezone=Europe/Berlin}} from UTC</strong> # Berlin is offset +0100 from UTC
       
@@ -182,7 +181,7 @@ moment:
 
 ## Timezones
 
-The plugin uses the timezone on the device viewed on. It does not use  Home Assistants time entity (for performace reasons, offline behaviour). Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
+By default the plugin will use timezone the device opened on. It will not use uset the Home Assistants time entity which has a 'timezoned' calculated time for performace reasons, offline behaviour. Specify a timezone in the IANA format, you can find them here: https://nodatime.org/TimeZones
 
 i.e. `timezone: Europe/London` or `{{moment timezone=Europe/London}}`
 
@@ -274,13 +273,27 @@ moment:
 
 ```
 
+More usefully, you can create a helper which dynamically gets a sensor state. Below I create `dynamicSensor` which passes through a `param` i.e. `hass.states[param].state` to get the state value. The helper is defined globally which can be accessed by other moments.
+
+```YAML
+type: custom:better-moment-card
+helper:
+  dynamicSensor: |
+    return hass.states[param].state
+moment:
+  - templateRaw: >
+      {{moment format=HH:mm }}
+      Temp: [[dynamicSensor(sensor.garage_multi_sensor_temprature)]] C
+```
+
 APIs available: 
 
 | Name     | Object                   |
 |----------|--------------------------|
 | DateTime | Luxon.js instance        |
-| hass     | Home Assistant JS Object |
-| config   | Full Moment Config Object            |
+| hass     | Home Assistant JS |
+| global_config   | Full moment config            |
+| config   | Current moment config            |
 | param    | Parameter passed through via helperName(thisparam) i.e.  thisparam                      |
 
 ## Layouts (Sections)
