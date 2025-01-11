@@ -9,7 +9,7 @@ class BetterMomentCard extends HTMLElement {
 			this.innerHTML = `<ha-card><div class="card-content" ${this.config.parentStyle ? 'style="' + this.config.parentStyle + ';"' : ""}></div>${this.config.parentHTML ? '' + this.config.parentHTML + '' : ""}</ha-card>`;
 			this.content = this.querySelector("div");
 			var config = this.config, elm = [];
-			if (config.moment !== null && config.moment[0]) {
+			if (this.config.moment?.[0]) {
 				Object.keys(config.moment).forEach(k => {
 					elm[k] = document.createElement('div');
 					elm[k].setAttribute("id", "moment-" + k);
@@ -36,7 +36,7 @@ class BetterMomentCard extends HTMLElement {
 						if (template && typeof template === 'string' && (config.moment[k].helper || config.helper)) {
 							template = template.replace(/\[\[(\w+)(?:\((.*?)\))?\]\]/g, (m, h, p) => {
 								try {
-									return (config.moment[k].helper?.[h] || config.helper?.[h]) ? new Function('DateTime', 'hass', 'config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]))(DateTime, this.hass_obj, config, p) : 'N/A';
+									return (config.moment[k].helper?.[h] || config.helper?.[h]) ? new Function('DateTime', 'hass', 'config', 'moment_config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]))(DateTime, this.hass_obj, config, config.moment[k], p) : 'N/A';
 								} catch (error) {
 									console.error(`Error executing helper function ${h}:`, error);
 									return 'N/A';
