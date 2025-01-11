@@ -36,7 +36,7 @@ class BetterMomentCard extends HTMLElement {
 						if (template && typeof template === 'string' && (config.moment[k].helper || config.helper)) {
 							template = template.replace(/\[\[(\w+)(?:\((.*?)\))?\]\]/g, (m, h, p) => {
 								try {
-									return (config.moment[k].helper?.[h] || config.helper?.[h]) ? new Function('DateTime', 'hass', 'config', 'moment_config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]))(DateTime, this.hass_obj, config, config.moment[k], p) : 'N/A';
+									return (config.moment[k].helper?.[h] || config.helper?.[h]) ? new Function('DateTime', 'hass', 'global_config', 'config', 'param', (config.moment[k].helper?.[h] || config.helper?.[h]))(DateTime, this.hass_obj, config, config.moment[k], p) : 'N/A';
 								} catch (error) {
 									console.error(`Error executing helper function ${h}:`, error);
 									return 'N/A';
