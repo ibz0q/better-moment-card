@@ -6,7 +6,6 @@ A lovelace card to show time/dates exactly how you want on your dashboard.
 
 [<img src="https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif">](https://raw.githubusercontent.com/ibz0q/better-moment-card/main/docs/live-preview.gif)
 </p>
-<a href="https://www.buymeacoffee.com/iba0q" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style=";width:157px !important;" ></a>
 
 ## Features:
 - Infinitely customizable
@@ -436,6 +435,10 @@ moment:
     parentStyle: |   **
       font-size:4.4em;
 ```
+### Support me
+
+Buy me a coffee :)
+<a href="https://www.buymeacoffee.com/iba0q" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style=";width:157px !important;" ></a>
 
 ## Feature requests
 
